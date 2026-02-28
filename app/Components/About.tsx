@@ -88,8 +88,7 @@ export default function About() {
                 <div className="space-y-8 text-xl text-black/70 leading-relaxed md:pt-4">
                     <p className="first-letter:text-5xl first-letter:font-bold first-letter:mr-3 first-letter:float-left first-letter:text-black">
                         I didn’t start off with AI, big projects, or a very refined tech stack.
-                        I started with curiosity — the thrill of turning a blinking cursor into something that worked.
-                        That small spark grew into building apps, leading communities, and exploring how artificial
+                        I started with curiosity. That small spark grew into building apps, leading communities, and exploring how artificial
                         intelligence can transform everyday experiences.
                     </p>
                     <p>
