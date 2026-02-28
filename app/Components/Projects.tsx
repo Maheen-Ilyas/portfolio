@@ -22,7 +22,7 @@ const projects = [
     {
         id: 3,
         title: "Distracted Driver Detection",
-        category: "Computer Vision",
+        category: "Deep Learning",
         description: "A CNN-based system using MobileNetV2 to classify driver behavior into 10 categories with 80.43% precision, engineered with lighting-invariant training.",
         tech: ["Python", "Pandas", "NumPy", "Matplotlib", "TensorFlow", "Keras", "MobileNetV2"],
         className: "md:col-span-2 md:row-span-1",
