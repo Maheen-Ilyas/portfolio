@@ -6,24 +6,21 @@ export default function CustomCursor() {
     const [isPointer, setIsPointer] = useState(false);
     const [isVisible, setIsVisible] = useState(false);
 
-    // Raw position of the mouse
+    // Raw coordinates for the inner dot
     const mouseX = useMotionValue(0);
     const mouseY = useMotionValue(0);
 
-    // Smoothed position using precisely tuned springs for zero latency feel
-    const springConfig = { damping: 40, stiffness: 600, mass: 0.4 };
+    // Spring physics for the outer ring (creates the trailing effect)
+    const springConfig = { damping: 25, stiffness: 400, mass: 0.5 };
     const smoothX = useSpring(mouseX, springConfig);
     const smoothY = useSpring(mouseY, springConfig);
 
     useEffect(() => {
-        // Hidden initially to avoid jump
         const handleMouseMove = (e: MouseEvent) => {
             mouseX.set(e.clientX);
             mouseY.set(e.clientY);
+            setIsVisible(true);
 
-            if (!isVisible) setIsVisible(true);
-
-            // Lightweight interactive check
             const target = e.target as HTMLElement;
             const isInteractive =
                 target.closest('a') ||
@@ -46,21 +43,39 @@ export default function CustomCursor() {
             document.removeEventListener("mouseleave", handleMouseLeave);
             document.removeEventListener("mouseenter", handleMouseEnter);
         };
-    }, [mouseX, mouseY, isVisible]);
+    }, [mouseX, mouseY]);
 
     return (
-        <motion.div
-            style={{
-                x: smoothX,
-                y: smoothY,
-                translateX: "-50%",
-                translateY: "-50%",
-                opacity: isVisible ? 1 : 0,
-            }}
-            className={`fixed top-0 left-0 w-6 h-6 border-[1.5px] border-black rounded-full pointer-events-none z-[9999] transition-[width,height,background-color] duration-300 ease-out flex items-center justify-center ${isPointer ? "w-12 h-12 bg-black/10 border-black/20" : "w-6 h-6 bg-transparent"
-                }`}
-        >
-            {isPointer && <div className="w-1 h-1 bg-black rounded-full" />}
-        </motion.div>
+        <>
+            {/* Outer Ring (Trails behind) */}
+            <motion.div
+                style={{
+                    x: smoothX,
+                    y: smoothY,
+                    opacity: isVisible ? 1 : 0,
+                }}
+                className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference"
+            >
+                <div
+                    className={`flex items-center justify-center -translate-x-1/2 -translate-y-1/2 rounded-full border border-white transition-all duration-300 ease-out ${isPointer ? "w-16 h-16 bg-white/10" : "w-10 h-10 bg-transparent"
+                        }`}
+                />
+            </motion.div>
+
+            {/* Inner Dot (Instant) */}
+            <motion.div
+                style={{
+                    x: mouseX,
+                    y: mouseY,
+                    opacity: isVisible ? 1 : 0,
+                }}
+                className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference"
+            >
+                <div
+                    className={`bg-white rounded-full -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ${isPointer ? "w-0 h-0" : "w-2 h-2"
+                        }`}
+                />
+            </motion.div>
+        </>
     );
 }

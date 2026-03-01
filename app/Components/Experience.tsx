@@ -1,7 +1,7 @@
 "use client";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 
-const containerVariants = {
+const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
         opacity: 1,
@@ -11,12 +11,15 @@ const containerVariants = {
     },
 };
 
-const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
+const itemVariants: Variants = {
+    hidden: { opacity: 0, y: 40, rotateX: -15, filter: "blur(10px)", scale: 0.95 },
     visible: {
         opacity: 1,
         y: 0,
-        transition: { duration: 0.6 },
+        rotateX: 0,
+        filter: "blur(0px)",
+        scale: 1,
+        transition: { duration: 0.8, ease: "easeOut" },
     },
 };
 
@@ -24,15 +27,15 @@ function ExperienceItem({ item }: { item: any }) {
     return (
         <motion.div
             variants={itemVariants}
-            className="group relative flex flex-col md:flex-row justify-between items-baseline gap-4 py-8 border-b border-black/5 hover:border-black/20 transition-colors"
+            className="group relative flex flex-col md:flex-row justify-between items-start md:items-baseline gap-4 py-8 border-b border-black/5 hover:border-black/20 transition-colors"
         >
-            <div className="flex flex-col md:flex-row md:items-baseline gap-4 md:gap-12 w-full">
-                <span className="text-sm font-mono text-black/40 min-w-[150px]">{item.year}</span>
+            <div className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-12 w-full">
+                <span className="text-sm font-mono text-black/40 md:min-w-[150px]">{item.year}</span>
                 <div className="flex-1">
                     <h3 className="text-2xl md:text-3xl font-bold group-hover:translate-x-2 transition-transform duration-500">
                         {item.role}
                     </h3>
-                    <p className="text-lg text-black/60 italic group-hover:text-black transition-colors duration-500">
+                    <p className="text-lg text-black/60 italic group-hover:text-black transition-colors duration-500 mt-1 md:mt-0">
                         {item.company}
                     </p>
                 </div>

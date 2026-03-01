@@ -28,6 +28,8 @@ export default function RootLayout({
       >
         <SmoothScroll>
           <CustomCursor />
+          {/* Subtle Film Grain Overlay */}
+          <div className="pointer-events-none fixed inset-0 z-[9999] opacity-[0.03] mix-blend-overlay noise-bg"></div>
           {children}
         </SmoothScroll>
       </body>

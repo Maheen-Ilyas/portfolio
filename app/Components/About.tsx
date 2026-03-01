@@ -13,31 +13,29 @@ export default function About() {
     const filmStripY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
 
     const skills = [
-        { name: "Python", color: "border-yellow-400", shadow: "shadow-[0_8px_20px_-6px_rgba(250,204,21,0.5)]" },
-        { name: "Dart", color: "border-blue-500", shadow: "shadow-[0_8px_20px_-6px_rgba(59,130,246,0.5)]" },
-        { name: "HTML", color: "border-orange-400", shadow: "shadow-[0_8px_20px_-6px_rgba(251,146,60,0.5)]" },
-        { name: "CSS", color: "border-cyan-400", shadow: "shadow-[0_8px_20px_-6px_rgba(34,211,238,0.5)]" },
-        { name: "JavaScript", color: "border-yellow-300", shadow: "shadow-[0_8px_20px_-6px_rgba(253,224,71,0.5)]" },
-        { name: "TypeScript", color: "border-blue-600", shadow: "shadow-[0_8px_20px_-6px_rgba(37,99,235,0.5)]" },
-        { name: "Flutter", color: "border-sky-400", shadow: "shadow-[0_8px_20px_-6px_rgba(56,189,248,0.5)]" },
-        { name: "React", color: "border-sky-500", shadow: "shadow-[0_8px_20px_-6px_rgba(14,165,233,0.5)]" },
-        { name: "Next.js", color: "border-black", shadow: "shadow-[0_8px_20px_-6px_rgba(0,0,0,0.2)]" },
-        { name: "FastAPI", color: "border-emerald-400", shadow: "shadow-[0_8px_20px_-6px_rgba(52,211,153,0.5)]" },
-        { name: "Firebase", color: "border-amber-400", shadow: "shadow-[0_8px_20px_-6px_rgba(251,191,36,0.5)]" },
-        { name: "Supabase", color: "border-emerald-500", shadow: "shadow-[0_8px_20px_-6px_rgba(16,185,129,0.5)]" },
-        { name: "ChromDB", color: "border-red-400", shadow: "shadow-[0_8px_20px_-6px_rgba(248,113,113,0.5)]" },
-        { name: "Git", color: "border-orange-500", shadow: "shadow-[0_8px_20px_-6px_rgba(249,115,22,0.5)]" },
-        { name: "GitHub", color: "border-gray-800", shadow: "shadow-[0_8px_20px_-6px_rgba(31,41,55,0.5)]" },
-        { name: "Pandas", color: "border-pink-400", shadow: "shadow-[0_8px_20_rgba(244,114,182,0.5)]" },
-        { name: "NumPy", color: "border-cyan-500", shadow: "shadow-[0_8px_20px_-6px_rgba(6,182,212,0.5)]" },
-        { name: "Matplotlib", color: "border-orange-400", shadow: "shadow-[0_8px_20px_-6px_rgba(251,146,60,0.5)]" },
-        { name: "Scikit-Learn", color: "border-orange-400", shadow: "shadow-[0_8px_20px_-6px_rgba(251,146,60,0.5)]" },
-        { name: "TensorFlow", color: "border-orange-600", shadow: "shadow-[0_8px_20px_-6px_rgba(234,88,12,0.5)]" },
-        { name: "PyTorch", color: "border-rose-500", shadow: "shadow-[0_8px_20px_-6px_rgba(244,63,94,0.5)]" },
-        { name: "LangChain", color: "border-teal-500", shadow: "shadow-[0_8px_20px_-6px_rgba(20,184,166,0.5)]" },
-        { name: "Hugging Face", color: "border-yellow-500", shadow: "shadow-[0_8px_20px_-6px_rgba(234,179,8,0.5)]" },
-
-
+        { name: "Python", color: "border-yellow-400", hover: "hover:bg-yellow-400/20 hover:text-yellow-600", shadow: "shadow-[0_8px_20px_-6px_rgba(250,204,21,0.5)]" },
+        { name: "Dart", color: "border-blue-500", hover: "hover:bg-blue-500/20 hover:text-blue-700", shadow: "shadow-[0_8px_20px_-6px_rgba(59,130,246,0.5)]" },
+        { name: "HTML", color: "border-orange-400", hover: "hover:bg-orange-400/20 hover:text-orange-600", shadow: "shadow-[0_8px_20px_-6px_rgba(251,146,60,0.5)]" },
+        { name: "CSS", color: "border-cyan-400", hover: "hover:bg-cyan-400/20 hover:text-cyan-600", shadow: "shadow-[0_8px_20px_-6px_rgba(34,211,238,0.5)]" },
+        { name: "JavaScript", color: "border-yellow-300", hover: "hover:bg-yellow-300/20 hover:text-yellow-600", shadow: "shadow-[0_8px_20px_-6px_rgba(253,224,71,0.5)]" },
+        { name: "TypeScript", color: "border-blue-600", hover: "hover:bg-blue-600/20 hover:text-blue-800", shadow: "shadow-[0_8px_20px_-6px_rgba(37,99,235,0.5)]" },
+        { name: "Flutter", color: "border-sky-400", hover: "hover:bg-sky-400/20 hover:text-sky-600", shadow: "shadow-[0_8px_20px_-6px_rgba(56,189,248,0.5)]" },
+        { name: "React", color: "border-sky-500", hover: "hover:bg-sky-500/20 hover:text-sky-700", shadow: "shadow-[0_8px_20px_-6px_rgba(14,165,233,0.5)]" },
+        { name: "Next.js", color: "border-black", hover: "hover:bg-black/10 hover:text-black", shadow: "shadow-[0_8px_20px_-6px_rgba(0,0,0,0.2)]" },
+        { name: "FastAPI", color: "border-emerald-400", hover: "hover:bg-emerald-400/20 hover:text-emerald-700", shadow: "shadow-[0_8px_20px_-6px_rgba(52,211,153,0.5)]" },
+        { name: "Firebase", color: "border-amber-400", hover: "hover:bg-amber-400/20 hover:text-amber-700", shadow: "shadow-[0_8px_20px_-6px_rgba(251,191,36,0.5)]" },
+        { name: "Supabase", color: "border-emerald-500", hover: "hover:bg-emerald-500/20 hover:text-emerald-700", shadow: "shadow-[0_8px_20px_-6px_rgba(16,185,129,0.5)]" },
+        { name: "ChromDB", color: "border-red-400", hover: "hover:bg-red-400/20 hover:text-red-700", shadow: "shadow-[0_8px_20px_-6px_rgba(248,113,113,0.5)]" },
+        { name: "Git", color: "border-orange-500", hover: "hover:bg-orange-500/20 hover:text-orange-700", shadow: "shadow-[0_8px_20px_-6px_rgba(249,115,22,0.5)]" },
+        { name: "GitHub", color: "border-gray-800", hover: "hover:bg-gray-800/20 hover:text-gray-900", shadow: "shadow-[0_8px_20px_-6px_rgba(31,41,55,0.5)]" },
+        { name: "Pandas", color: "border-pink-400", hover: "hover:bg-pink-400/20 hover:text-pink-700", shadow: "shadow-[0_8px_20_rgba(244,114,182,0.5)]" },
+        { name: "NumPy", color: "border-cyan-500", hover: "hover:bg-cyan-500/20 hover:text-cyan-700", shadow: "shadow-[0_8px_20px_-6px_rgba(6,182,212,0.5)]" },
+        { name: "Matplotlib", color: "border-orange-400", hover: "hover:bg-orange-400/20 hover:text-orange-700", shadow: "shadow-[0_8px_20px_-6px_rgba(251,146,60,0.5)]" },
+        { name: "Scikit-Learn", color: "border-orange-400", hover: "hover:bg-orange-400/20 hover:text-orange-700", shadow: "shadow-[0_8px_20px_-6px_rgba(251,146,60,0.5)]" },
+        { name: "TensorFlow", color: "border-orange-600", hover: "hover:bg-orange-600/20 hover:text-orange-800", shadow: "shadow-[0_8px_20px_-6px_rgba(234,88,12,0.5)]" },
+        { name: "PyTorch", color: "border-rose-500", hover: "hover:bg-rose-500/20 hover:text-rose-700", shadow: "shadow-[0_8px_20px_-6px_rgba(244,63,94,0.5)]" },
+        { name: "LangChain", color: "border-teal-500", hover: "hover:bg-teal-500/20 hover:text-teal-700", shadow: "shadow-[0_8px_20px_-6px_rgba(20,184,166,0.5)]" },
+        { name: "Hugging Face", color: "border-yellow-500", hover: "hover:bg-yellow-500/20 hover:text-yellow-700", shadow: "shadow-[0_8px_20px_-6px_rgba(234,179,8,0.5)]" },
     ];
 
     const containerVariants = {
@@ -57,6 +55,8 @@ export default function About() {
         visible: { opacity: 1, scale: 1 },
     };
 
+    const constraintsRef = useRef(null);
+
     return (
         <section ref={containerRef} id="about" className="py-32 border-t border-foreground/5 relative overflow-hidden">
             <motion.div
@@ -72,12 +72,17 @@ export default function About() {
                         The Journey so Far.
                     </h1>
 
-                    <motion.div className="flex flex-wrap gap-3 max-w-xl">
+                    <motion.div ref={constraintsRef} className="flex flex-wrap gap-3 max-w-xl relative">
                         {skills.map((skill) => (
                             <motion.span
                                 key={skill.name}
                                 variants={itemVariants}
-                                className={`px-4 py-1 border-2 ${skill.color} ${skill.shadow} rounded-full text-xs font-semibold hover:bg-black/5 transition-all hover:translate-y-[-4px] cursor-default`}
+                                drag
+                                dragConstraints={constraintsRef}
+                                dragElastic={0.8}
+                                dragTransition={{ bounceStiffness: 200, bounceDamping: 10 }}
+                                whileDrag={{ scale: 1.1, cursor: "grabbing", zIndex: 10 }}
+                                className={`px-4 py-1 border-2 ${skill.color} ${skill.shadow} ${skill.hover} rounded-full text-xs font-semibold transition-all duration-300 hover:translate-y-[-4px] cursor-grab`}
                             >
                                 {skill.name}
                             </motion.span>
