@@ -22,15 +22,15 @@ export default function Hero() {
         offset: ["start start", "end start"],
     });
 
-    const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
+    const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "15%"]);
     const tickerItems = [...TICKER_ITEMS, ...TICKER_ITEMS];
 
     return (
         <section
             ref={containerRef}
             id="hero"
-            className="min-h-screen flex flex-col"
-            style={{ background: "var(--cream)", paddingTop: "130px" }} // offset for fixed masthead
+            className="flex flex-col"
+            style={{ background: "var(--cream)", paddingTop: "110px" }}
         >
             {/* ── FRONT PAGE GRID ── */}
             <div className="flex-1 grid grid-cols-1 md:grid-cols-12 border-b"
@@ -41,25 +41,25 @@ export default function Hero() {
                     initial={{ opacity: 0, y: 24 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.9, ease: "easeOut" }}
-                    className="md:col-span-5 flex flex-col justify-between px-6 md:px-12 py-10 md:py-16 border-r"
+                    className="md:col-span-5 flex flex-col justify-between px-6 md:px-10 py-6 md:py-10 border-r"
                     style={{ borderColor: "var(--rule)" }}
                 >
                     {/* Section label */}
                     <div>
-                        <p className="section-label mb-4">Featured</p>
+                        <p className="section-label mb-3">Featured</p>
                         <div
-                            className="column-rule mb-6"
+                            className="column-rule mb-5"
                             style={{ borderTopWidth: "3px", borderTopStyle: "double", borderColor: "var(--ink)" }}
                         />
 
                         {/* Headline */}
                         <h1
-                            className="font-serif text-5xl md:text-7xl font-black leading-[1.05] tracking-tight mb-6"
+                            className="font-serif text-4xl md:text-6xl font-black leading-[1.05] tracking-tight mb-5"
                             style={{ color: "var(--ink)" }}
                         >
                             <motion.span
                                 className="block"
-                                whileHover={{ x: 8, opacity: 0.6 }}
+                                whileHover={{ x: 6, opacity: 0.7 }}
                                 transition={{ type: "spring", stiffness: 300 }}
                             >
                                 AI-Driven.
@@ -67,7 +67,7 @@ export default function Hero() {
                             <motion.span
                                 className="block"
                                 style={{ color: "var(--ink-faded)" }}
-                                whileHover={{ x: 8, opacity: 1, color: "var(--ink)" }}
+                                whileHover={{ x: 6, opacity: 1, color: "var(--ink)" }}
                                 transition={{ type: "spring", stiffness: 300 }}
                             >
                                 Future-Ready.
@@ -75,13 +75,13 @@ export default function Hero() {
                         </h1>
 
                         {/* Byline rule */}
-                        <div className="column-rule-thin mb-4" style={{ borderColor: "var(--rule)" }} />
-                        <p className="dateline mb-4">By Maheen Ilyas · Telangana, India</p>
-                        <div className="column-rule-thin mb-6" style={{ borderColor: "var(--rule)" }} />
+                        <div className="column-rule-thin mb-3" style={{ borderColor: "var(--rule)" }} />
+                        <p className="dateline mb-3">By Maheen Ilyas · Telangana, India</p>
+                        <div className="column-rule-thin mb-5" style={{ borderColor: "var(--rule)" }} />
 
                         {/* Lead paragraph */}
                         <p
-                            className="font-sans text-base md:text-lg leading-relaxed"
+                            className="font-sans text-sm md:text-base leading-relaxed"
                             style={{ color: "var(--ink-faded)" }}
                         >
                             Designing intelligent, full-stack solutions that blend seamless
@@ -91,20 +91,20 @@ export default function Hero() {
                     </div>
 
                     {/* Pull quote */}
-                    <blockquote className="pull-quote mt-8 mb-0">
-                        "Building things that feel less like software, and more like something
-                        that belongs in your hands."
+                    <blockquote className="pull-quote mt-6 mb-0 text-sm md:text-base">
+                        &ldquo;Building things that feel less like software, and more like something
+                        that belongs in your hands.&rdquo;
                     </blockquote>
                 </motion.div>
 
                 {/* ── CENTER COLUMN – Hero image ── */}
                 <div
-                    className="md:col-span-4 relative overflow-hidden border-r"
-                    style={{ minHeight: "55vh", borderColor: "var(--rule)" }}
+                    className="md:col-span-4 relative overflow-hidden border-r min-h-[350px] md:min-h-[420px]"
+                    style={{ borderColor: "var(--rule)" }}
                 >
-                    <motion.div style={{ y: imageY }} className="absolute inset-0 w-full h-[120%]">
+                    <motion.div style={{ y: imageY }} className="absolute inset-0 w-full h-[115%]">
                         <motion.div
-                            animate={{ scale: [1, 1.04, 1], rotate: [0, 0.5, 0] }}
+                            animate={{ scale: [1, 1.03, 1], rotate: [0, 0.5, 0] }}
                             transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
                             className="w-full h-full relative"
                         >
@@ -120,10 +120,10 @@ export default function Hero() {
 
                     {/* Overlay caption */}
                     <div
-                        className="absolute bottom-0 left-0 right-0 px-4 py-3"
-                        style={{ background: "rgba(26,26,26,0.75)" }}
+                        className="absolute bottom-0 left-0 right-0 px-4 py-2.5"
+                        style={{ background: "rgba(26,26,26,0.8)" }}
                     >
-                        <p className="font-sans text-[10px] uppercase tracking-widest text-white/80">
+                        <p className="font-sans text-[10px] uppercase tracking-widest text-white/90">
                             Software Engineer · Class of 2025 · B.E. Computer Science
                         </p>
                     </div>
@@ -134,29 +134,31 @@ export default function Hero() {
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 0.9, delay: 0.3, ease: "easeOut" }}
-                    className="md:col-span-3 flex flex-col px-6 py-10 md:py-16 gap-6"
+                    className="md:col-span-3 flex flex-col px-6 py-6 md:py-10 gap-4"
                 >
                     <div>
-                        <p className="section-label mb-3">At a Glance</p>
-                        <div className="column-rule-red mb-4" style={{ borderTopWidth: "2px", borderTopStyle: "solid", borderColor: "var(--red)" }} />
+                        <p className="section-label mb-2">At a Glance</p>
+                        <div className="column-rule-red mb-3" style={{ borderTopWidth: "2px", borderTopStyle: "solid", borderColor: "var(--red)" }} />
                     </div>
 
                     {[
-                        { label: "University", value: "Osmania University" },
                         { label: "CGPA", value: "8.63 / 10" },
+                        { label: "University", value: "Osmania University" },
                         { label: "Graduation", value: "Jul 2025" },
-                        
+                        { label: "Current Role", value: "Software Engineer" },
+                        { label: "Location", value: "Telangana, India" },
+                        { label: "Specialisation", value: "AI & ML Systems" },
                     ].map(({ label, value }) => (
-                        <div key={label} className="border-b pb-4" style={{ borderColor: "var(--rule)" }}>
-                            <p className="dateline mb-1">{label}</p>
-                            <p className="font-serif text-base font-bold" style={{ color: "var(--ink)" }}>{value}</p>
+                        <div key={label} className="border-b pb-2.5" style={{ borderColor: "var(--rule)" }}>
+                            <p className="dateline mb-0.5" style={{ fontSize: "0.6rem" }}>{label}</p>
+                            <p className="font-serif text-sm font-bold" style={{ color: "var(--ink)" }}>{value}</p>
                         </div>
                     ))}
 
                     {/* Social links */}
-                    <div className="mt-auto pt-4" style={{ borderTop: "1px solid var(--rule)" }}>
-                        <p className="dateline mb-3">Connect</p>
-                        <div className="flex flex-col gap-2">
+                    <div className="mt-auto pt-3" style={{ borderTop: "1px solid var(--rule)" }}>
+                        <p className="dateline mb-2">Connect</p>
+                        <div className="flex flex-col gap-1.5">
                             {[
                                 { label: "LinkedIn", href: "https://linkedin.com/in/maheen-ilyas" },
                                 { label: "GitHub", href: "https://github.com/Maheen-Ilyas" },
@@ -167,10 +169,10 @@ export default function Hero() {
                                     href={href}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="font-sans text-xs font-semibold uppercase tracking-widest flex items-center gap-2 transition-colors group"
+                                    className="font-sans text-[11px] font-semibold uppercase tracking-widest flex items-center gap-2 transition-colors group"
                                     style={{ color: "var(--red)" }}
                                 >
-                                    <span className="w-4 h-px group-hover:w-8 transition-all duration-300" style={{ background: "var(--red)" }} />
+                                    <span className="w-3 h-px group-hover:w-6 transition-all duration-300" style={{ background: "var(--red)" }} />
                                     {label}
                                 </a>
                             ))}
