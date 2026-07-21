@@ -1,171 +1,56 @@
 "use client";
-import { useState, useRef } from "react";
-import { motion, Variants, useScroll, useTransform } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const projects = [
     {
-        id: 1,
+        id: "01",
         title: "Security Wrapper",
         category: "Cybersecurity · Desktop",
         dates: "Apr 2026 – May 2026",
+        lead: "Zero-dependency application for deploying 100% portable executables.",
         description:
-            "Zero-dependency application for deploying 100% portable executables. Accomplishes security injection by modifying Android & iOS apps without source code, implementing 19 security features. Secured multi-vendor tracking by enforcing strict subscription limits via a secure FastAPI backend.",
+            "Accomplishes security injection by modifying Android & iOS apps without source code, implementing 19 security features. Secured multi-vendor tracking by enforcing strict subscription limits via a secure FastAPI backend.",
         tech: ["Next.js", "FastAPI", "Python", "PyQt6", "Smali", "Apktool", "Dylib", "PyInstaller"],
+        featured: true,
     },
     {
-        id: 2,
+        id: "02",
         title: "NomosAI",
         category: "Artificial Intelligence",
         dates: "Feb 2025 – Apr 2025",
+        lead: "High-precision legal research assistant powered by RAG and hybrid search.",
         description:
-            "A high-precision legal research assistant using RAG and hybrid search (Semantic + Keyword) to query thousands of legal documents. Features recursive character chunking, top-8 context retrieval, and a modular CBAC web interface supporting up to 5 concurrent users.",
+            "Queries thousands of legal documents using hybrid search (Semantic + Keyword). Features recursive character chunking, top-8 context retrieval, and a modular CBAC web interface supporting concurrent user collaboration.",
         tech: ["Next.js", "FastAPI", "LangChain", "Hugging Face", "ChromaDB", "Llama3.9", "PostgreSQL"],
+        featured: true,
     },
     {
-        id: 3,
+        id: "03",
         title: "PawPal",
         category: "Mobile Application",
         dates: "2024",
+        lead: "All-in-one pet care platform with AI emergency assistance.",
         description:
-            "An all-in-one pet care platform featuring medication tracking, an emergency veterinary locator, and AI-powered Emergency Guide using the Gemini API.",
+            "Features medication tracking, an emergency veterinary locator using OpenStreetMap, and an AI-powered Emergency Guide leveraging the Gemini API.",
         tech: ["Dart", "Flutter", "Firebase", "GetX", "Gemini AI", "OpenStreetMap", "Overpass"],
+        featured: false,
     },
     {
-        id: 4,
+        id: "04",
         title: "Distracted Driver Detection",
         category: "Deep Learning",
         dates: "Jul 2024 – Aug 2024",
+        lead: "CNN-based classification system using MobileNetV2 with 80.43% precision.",
         description:
-            "A CNN-based system using MobileNetV2 to classify driver behaviour into 10 categories with 80.43% precision. Engineered with two-phase fine-tuning on 17,446 training images and lighting-invariant data augmentation.",
+            "Classifies driver behaviour into 10 categories. Engineered with two-phase fine-tuning on 17,446 training images and lighting-invariant data augmentation strategies.",
         tech: ["Python", "TensorFlow", "MobileNetV2", "Pandas", "NumPy", "Matplotlib", "Scikit-Learn"],
+        featured: false,
     },
 ];
 
-const cardVariants: Variants = {
-    hidden: { opacity: 0, y: 30, filter: "blur(10px)" },
-    visible: {
-        opacity: 1, y: 0, filter: "blur(0px)",
-        transition: { duration: 0.8, ease: "easeOut" },
-    },
-};
-
-function ProjectCard({ project }: { project: typeof projects[0] }) {
-    const [isFlipped, setIsFlipped] = useState(false);
-
-    return (
-        <motion.div
-            variants={cardVariants}
-            className="relative cursor-pointer w-[85vw] md:w-[560px] h-[420px] md:h-[460px] shrink-0 mx-3 md:mx-6"
-            onMouseEnter={() => setIsFlipped(true)}
-            onMouseLeave={() => setIsFlipped(false)}
-            style={{ perspective: "1200px" }}
-        >
-            <motion.div
-                className="w-full h-full relative"
-                initial={false}
-                animate={{ rotateY: isFlipped ? 180 : 0 }}
-                transition={{ duration: 0.55, ease: "easeInOut" }}
-                style={{ transformStyle: "preserve-3d" }}
-            >
-                {/* ── Front – Newspaper clipping ── */}
-                <div
-                    className="absolute inset-0 flex flex-col justify-between p-6 md:p-10 clipping-card rounded-sm"
-                    style={{ backfaceVisibility: "hidden", background: "var(--cream)" }}
-                >
-                    {/* Top meta */}
-                    <div>
-                        <div className="flex items-center justify-between mb-4">
-                            <span className="section-label" style={{ color: "var(--red)" }}>
-                                {String(project.id).padStart(2, "0")} / {project.category}
-                            </span>
-                            <span className="dateline">{project.dates}</span>
-                        </div>
-                        <div className="column-rule mb-6" style={{ borderTopWidth: "3px", borderTopStyle: "double", borderColor: "var(--ink)" }} />
-                    </div>
-
-                    {/* Headline */}
-                    <div>
-                        <h3
-                            className="font-serif text-4xl md:text-5xl font-black tracking-tight leading-tight mb-4"
-                            style={{ color: "var(--ink)" }}
-                        >
-                            {project.title}
-                        </h3>
-                        <p className="font-sans text-sm" style={{ color: "var(--ink-faded)" }}>
-                            Hover to read the full story →
-                        </p>
-                    </div>
-
-                    {/* Bottom rule */}
-                    <div className="column-rule-thin" style={{ borderColor: "var(--rule)" }} />
-                </div>
-
-                {/* ── Back – Full article ── */}
-                <div
-                    className="absolute inset-0 p-6 md:p-10 rounded-sm flex flex-col justify-between"
-                    style={{
-                        backfaceVisibility: "hidden",
-                        transform: "rotateY(180deg)",
-                        background: "var(--ink)",
-                        color: "var(--cream)",
-                    }}
-                >
-                    {/* Header */}
-                    <div>
-                        <div className="flex items-center justify-between mb-4">
-                            <span className="font-sans text-[10px] uppercase tracking-widest opacity-50">
-                                {project.category}
-                            </span>
-                            <span className="font-sans text-[10px] uppercase tracking-widest opacity-50">
-                                {project.dates}
-                            </span>
-                        </div>
-                        <div style={{ borderTop: "1px solid rgba(245,240,232,0.15)" }} className="mb-4" />
-
-                        <h3
-                            className="font-serif text-2xl md:text-3xl font-black tracking-tight mb-4"
-                            style={{ color: "var(--cream)" }}
-                        >
-                            {project.title}
-                        </h3>
-                        <p
-                            className="font-sans text-sm md:text-base leading-relaxed"
-                            style={{ color: "rgba(245,240,232,0.7)" }}
-                        >
-                            {project.description}
-                        </p>
-                    </div>
-
-                    {/* Tech tags */}
-                    <div>
-                        <div style={{ borderTop: "1px solid rgba(245,240,232,0.15)" }} className="mb-4" />
-                        <p className="dateline mb-3" style={{ color: "rgba(245,240,232,0.4)" }}>Built with</p>
-                        <div className="flex flex-wrap gap-2">
-                            {project.tech.map((t) => (
-                                <span
-                                    key={t}
-                                    className="font-sans text-[10px] font-semibold uppercase tracking-widest px-3 py-1 rounded-sm"
-                                    style={{
-                                        border: "1px solid rgba(245,240,232,0.2)",
-                                        color: "rgba(245,240,232,0.8)",
-                                        background: "rgba(245,240,232,0.05)",
-                                    }}
-                                >
-                                    {t}
-                                </span>
-                            ))}
-                        </div>
-                    </div>
-                </div>
-            </motion.div>
-        </motion.div>
-    );
-}
-
 export default function Projects() {
-    const targetRef = useRef<HTMLDivElement>(null);
-    const { scrollYProgress } = useScroll({ target: targetRef });
-    const x = useTransform(scrollYProgress, [0, 1], ["0%", "-55%"]);
+    const [activeTab, setActiveTab] = useState<number | null>(null);
 
     return (
         <section
@@ -173,7 +58,7 @@ export default function Projects() {
             className="border-t"
             style={{ borderColor: "var(--rule)", background: "var(--cream)" }}
         >
-            {/* Section header */}
+            {/* Section header bar */}
             <div
                 className="px-6 md:px-12 py-4 flex items-center justify-between border-b"
                 style={{ borderColor: "var(--rule)" }}
@@ -183,40 +68,115 @@ export default function Projects() {
                 <p className="dateline">Built Along the Way</p>
             </div>
 
-            {/* Headline */}
+            {/* Headline section */}
             <div
-                className="px-6 md:px-12 py-8 border-b"
+                className="px-6 md:px-12 py-10 md:py-16 border-b"
                 style={{ borderColor: "var(--rule)" }}
             >
-                <h1
-                    className="font-serif text-4xl md:text-6xl font-black tracking-tight"
-                    style={{ color: "var(--ink)" }}
-                >
-                    Built Along the Way.
-                </h1>
+                <div className="max-w-4xl">
+                    <p className="dateline mb-2">Featured Dispatch & Portfolio</p>
+                    <h1
+                        className="font-serif text-4xl md:text-6xl font-black tracking-tight leading-tight"
+                        style={{ color: "var(--ink)" }}
+                    >
+                        Built Along the Way.
+                    </h1>
+                </div>
             </div>
 
-            {/* Sticky horizontal scroll */}
-            <div ref={targetRef} className="relative h-[380vh]">
-                <div
-                    className="sticky top-0 flex items-center overflow-hidden bg-transparent"
-                    style={{ height: "82vh" }}
-                >
-                    <motion.div
-                        style={{ x }}
-                        className="flex px-6 md:px-12"
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true, margin: "-50px" }}
-                        transition={{ staggerChildren: 0.15 }}
-                    >
-                        {projects.map((project) => (
-                            <ProjectCard key={project.id} project={project} />
-                        ))}
-                        {/* End spacer */}
-                        <div className="w-[8vw] md:w-[20vw] shrink-0" />
-                    </motion.div>
-                </div>
+            {/* Editorial Grid — Broadsheet 2-column layout */}
+            <div className="grid grid-cols-1 md:grid-cols-2">
+                {projects.map((project, index) => {
+                    const isExpanded = activeTab === index;
+                    const isRightColumn = index % 2 !== 0;
+                    const isLastRow = index >= projects.length - 2;
+
+                    return (
+                        <motion.article
+                            key={project.id}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true, margin: "-50px" }}
+                            transition={{ duration: 0.6, delay: index * 0.1 }}
+                            className={`p-6 md:p-10 flex flex-col justify-between transition-all duration-300 relative group ${
+                                !isRightColumn ? "md:border-r" : ""
+                            } ${!isLastRow ? "border-b" : "border-b md:border-b-0"}`}
+                            style={{
+                                borderColor: "var(--rule)",
+                                background: isExpanded ? "var(--paper)" : "transparent",
+                            }}
+                        >
+                            <div>
+                                {/* Top Rule & Category */}
+                                <div className="flex items-center justify-between mb-4">
+                                    <span
+                                        className="section-label"
+                                        style={{ color: "var(--red)" }}
+                                    >
+                                        ART. {project.id} · {project.category}
+                                    </span>
+                                    <span className="dateline">{project.dates}</span>
+                                </div>
+
+                                <div
+                                    className="column-rule mb-6"
+                                    style={{
+                                        borderTopWidth: "3px",
+                                        borderTopStyle: "double",
+                                        borderColor: "var(--ink)",
+                                    }}
+                                />
+
+                                {/* Project Title */}
+                                <h2
+                                    className="font-serif text-3xl md:text-4xl font-black tracking-tight mb-3 group-hover:text-[var(--red)] transition-colors duration-300"
+                                    style={{ color: "var(--ink)" }}
+                                >
+                                    {project.title}
+                                </h2>
+
+                                {/* Lead sentence */}
+                                <p
+                                    className="font-serif italic text-lg leading-snug mb-4"
+                                    style={{ color: "var(--ink)" }}
+                                >
+                                    &ldquo;{project.lead}&rdquo;
+                                </p>
+
+                                {/* Description */}
+                                <p
+                                    className="font-sans text-sm md:text-base leading-relaxed mb-6"
+                                    style={{ color: "var(--ink-faded)" }}
+                                >
+                                    {project.description}
+                                </p>
+                            </div>
+
+                            {/* Tech Stack Tags */}
+                            <div>
+                                <div
+                                    className="column-rule-thin mb-4"
+                                    style={{ borderColor: "var(--rule)" }}
+                                />
+                                <div className="flex flex-wrap items-center gap-2">
+                                    <span className="dateline mr-2">Reported Stack:</span>
+                                    {project.tech.map((t) => (
+                                        <span
+                                            key={t}
+                                            className="tag-pill text-[10px]"
+                                            style={{
+                                                borderColor: "rgba(26,26,26,0.2)",
+                                                color: "var(--ink)",
+                                            }}
+                                        >
+                                            {t}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        </motion.article>
+                    );
+                })}
             </div>
         </section>
     );
