@@ -15,10 +15,15 @@ export default function ContactDrawer({ isOpen, onClose }: ContactDrawerProps) {
     useEffect(() => {
         if (isOpen) {
             document.body.style.overflow = "hidden";
+            document.documentElement.classList.add("lenis-stopped");
         } else {
             document.body.style.overflow = "unset";
+            document.documentElement.classList.remove("lenis-stopped");
         }
-        return () => { document.body.style.overflow = "unset"; };
+        return () => {
+            document.body.style.overflow = "unset";
+            document.documentElement.classList.remove("lenis-stopped");
+        };
     }, [isOpen]);
 
     const handleSubmit = async (e: React.FormEvent) => {
@@ -61,19 +66,27 @@ export default function ContactDrawer({ isOpen, onClose }: ContactDrawerProps) {
                         style={{ background: "rgba(26,26,26,0.5)", backdropFilter: "blur(4px)" }}
                     />
 
-                    {/* Drawer */}
+                    {/* Drawer with Lenis prevention */}
                     <motion.div
                         initial={{ x: "100%" }}
                         animate={{ x: 0 }}
                         exit={{ x: "100%" }}
                         transition={{ type: "spring", damping: 30, stiffness: 200 }}
-                        className="fixed right-0 top-0 bottom-0 w-[100vw] md:w-[500px] z-[101] flex flex-col border-l"
+                        data-lenis-prevent
+                        data-lenis-prevent-wheel
+                        data-lenis-prevent-touch
+                        className="fixed right-0 top-0 bottom-0 w-[100vw] md:w-[500px] z-[101] flex flex-col border-l overscroll-contain"
                         style={{ background: "var(--cream)", borderColor: "var(--rule)" }}
                     >
                         {/* Red top bar */}
                         <div style={{ height: "4px", background: "var(--red)", flexShrink: 0 }} />
 
-                        <div className="flex-1 overflow-y-auto p-6 md:p-12">
+                        <div
+                            data-lenis-prevent
+                            data-lenis-prevent-wheel
+                            data-lenis-prevent-touch
+                            className="flex-1 overflow-y-auto p-6 md:p-12 overscroll-contain"
+                        >
                             {/* Header */}
                             <div className="flex justify-between items-start mb-8">
                                 <div>
