@@ -1,21 +1,70 @@
 "use client";
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 
 export default function TopNavigation({ scrolled }: { scrolled: boolean }) {
+    const [date, setDate] = useState("");
+
+    useEffect(() => {
+        const d = new Date();
+        setDate(d.toLocaleDateString("en-US", { weekday: "long", year: "numeric", month: "long", day: "numeric" }).toUpperCase());
+    }, []);
+
     return (
-        <nav className="fixed top-0 left-0 right-0 z-50 flex justify-between w-full items-center px-4 md:px-8 py-4 md:py-6 transition-all duration-300">
-            <div className="text-[10px] sm:text-xs md:text-xl font-bold hover:opacity-70 transition-opacity text-black">
-                <a href="#hero">MI</a>
+        <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "shadow-sm" : ""}`}
+            style={{ background: "var(--cream)" }}>
+
+            {/* Top red bar — issue & date line */}
+            <div className="w-full px-4 md:px-12 py-1 flex justify-between items-center"
+                style={{ background: "var(--red)" }}>
+                <span className="text-[10px] font-sans font-semibold tracking-widest uppercase text-white/90">
+                    Est. 2021 · Telangana, India
+                </span>
+                <span className="text-[10px] font-sans font-semibold tracking-widest uppercase text-white/90">
+                    {date || "MONDAY, JULY 21, 2026"}
+                </span>
+                <span className="text-[10px] font-sans font-semibold tracking-widest uppercase text-white/90">
+                    Vol. I, Issue 1
+                </span>
             </div>
-            <div className="hover:opacity-50 transition-opacity text-[10px] sm:text-xs md:text-xl font-bold uppercase text-black">
-                <a href="#about">ABOUT</a>
+
+            {/* Masthead */}
+            <div className="w-full flex flex-col items-center py-3 md:py-4 px-4 md:px-12 border-b-2"
+                style={{ borderColor: "var(--ink)" }}>
+                <a href="#hero"
+                    className="masthead-title text-3xl md:text-6xl font-bold tracking-wide text-center leading-none"
+                    style={{ color: "var(--ink)", fontFamily: "var(--font-fraktur, 'Playfair Display', serif)" }}>
+                    Maheen Ilyas
+                </a>
+                <p className="font-sans text-[10px] md:text-xs tracking-[0.3em] uppercase mt-1"
+                    style={{ color: "var(--ink-faded)" }}>
+                    Software Engineer · AI Researcher · Full-Stack Developer
+                </p>
             </div>
-            <div className={`hover:opacity-50 transition-opacity text-[10px] sm:text-xs md:text-xl font-bold uppercase transition-colors duration-500 ${scrolled ? 'text-black' : 'md:text-white text-black'}`}>
-                <a href="#experience">EXPERIENCE</a>
-            </div>
-            <div className={`hover:opacity-50 transition-opacity text-[10px] sm:text-xs md:text-xl font-bold uppercase transition-colors duration-500 ${scrolled ? 'text-black' : 'md:text-white text-black'}`}>
-                <a href="#projects">PROJECTS</a>
-            </div>
-        </nav>
+
+            {/* Nav rule */}
+            <nav className="w-full flex justify-center items-center gap-0 border-b"
+                style={{ borderColor: "var(--rule)", background: "var(--cream)" }}>
+                {[
+                    { label: "About", href: "#about" },
+                    { label: "Education", href: "#education" },
+                    { label: "Experience", href: "#experience" },
+                    { label: "Projects", href: "#projects" },
+                ].map((link, i) => (
+                    <a
+                        key={link.label}
+                        href={link.href}
+                        className="px-5 md:px-8 py-2 font-sans text-[10px] md:text-xs font-semibold uppercase tracking-widest transition-all duration-200 border-r hover:text-white"
+                        style={{
+                            borderColor: "var(--rule)",
+                            color: "var(--ink)",
+                        }}
+                        onMouseEnter={e => (e.currentTarget.style.background = "var(--ink)", e.currentTarget.style.color = "var(--cream)")}
+                        onMouseLeave={e => (e.currentTarget.style.background = "transparent", e.currentTarget.style.color = "var(--ink)")}
+                    >
+                        {link.label}
+                    </a>
+                ))}
+            </nav>
+        </header>
     );
 }

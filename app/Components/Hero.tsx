@@ -3,6 +3,18 @@ import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
+const TICKER_ITEMS = [
+    "AI-Driven Engineer",
+    "FastAPI · Next.js · Flutter",
+    "RAG & LLM Systems",
+    "TensorFlow · PyTorch",
+    "Open-Source Contributor",
+    "GDG Chief Coordinator",
+    "Full-Stack Developer",
+    "Deep Learning Researcher",
+    "mahilyaos05@gmail.com",
+];
+
 export default function Hero() {
     const containerRef = useRef(null);
     const { scrollYProgress } = useScroll({
@@ -10,78 +22,179 @@ export default function Hero() {
         offset: ["start start", "end start"],
     });
 
-    const y = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.2,
-            },
-        },
-    };
-
-    const itemVariants = {
-        hidden: { opacity: 0, y: 20 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: {
-                duration: 0.8
-            }
-        },
-    };
+    const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "18%"]);
+    const tickerItems = [...TICKER_ITEMS, ...TICKER_ITEMS];
 
     return (
-        <section ref={containerRef} id="hero" className="min-h-screen grid grid-cols-1 md:grid-cols-2 relative overflow-hidden">
-            <div className="flex flex-col justify-center px-6 md:px-24 py-32 md:py-0">
+        <section
+            ref={containerRef}
+            id="hero"
+            className="min-h-screen flex flex-col"
+            style={{ background: "var(--cream)", paddingTop: "130px" }} // offset for fixed masthead
+        >
+            {/* ── FRONT PAGE GRID ── */}
+            <div className="flex-1 grid grid-cols-1 md:grid-cols-12 border-b"
+                style={{ borderColor: "var(--rule)" }}>
+
+                {/* ── LEFT COLUMN – Lead story ── */}
                 <motion.div
-                    variants={containerVariants}
-                    initial="hidden"
-                    animate="visible"
-                    className="space-y-4 relative z-10"
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.9, ease: "easeOut" }}
+                    className="md:col-span-5 flex flex-col justify-between px-6 md:px-12 py-10 md:py-16 border-r"
+                    style={{ borderColor: "var(--rule)" }}
                 >
-                    <motion.div
-                        variants={itemVariants}
-                        className="text-4xl md:text-6xl font-bold leading-[1.1] text-black tracking-tight"
-                    >
-                        <motion.div whileHover={{ x: 10, filter: "blur(2px)", color: "rgba(0,0,0,0.5)" }} transition={{ type: "spring", stiffness: 300 }} className="inline-block cursor-default">
-                            AI-Driven.
-                        </motion.div> <br />
-                        <motion.div whileHover={{ x: 10, filter: "blur(2px)", color: "rgba(0,0,0,0.5)" }} transition={{ type: "spring", stiffness: 300 }} className="inline-block text-black/30 cursor-default">
-                            Future-Ready.
+                    {/* Section label */}
+                    <div>
+                        <p className="section-label mb-4">Featured</p>
+                        <div
+                            className="column-rule mb-6"
+                            style={{ borderTopWidth: "3px", borderTopStyle: "double", borderColor: "var(--ink)" }}
+                        />
+
+                        {/* Headline */}
+                        <h1
+                            className="font-serif text-5xl md:text-7xl font-black leading-[1.05] tracking-tight mb-6"
+                            style={{ color: "var(--ink)" }}
+                        >
+                            <motion.span
+                                className="block"
+                                whileHover={{ x: 8, opacity: 0.6 }}
+                                transition={{ type: "spring", stiffness: 300 }}
+                            >
+                                AI-Driven.
+                            </motion.span>
+                            <motion.span
+                                className="block"
+                                style={{ color: "var(--ink-faded)" }}
+                                whileHover={{ x: 8, opacity: 1, color: "var(--ink)" }}
+                                transition={{ type: "spring", stiffness: 300 }}
+                            >
+                                Future-Ready.
+                            </motion.span>
+                        </h1>
+
+                        {/* Byline rule */}
+                        <div className="column-rule-thin mb-4" style={{ borderColor: "var(--rule)" }} />
+                        <p className="dateline mb-4">By Maheen Ilyas · Telangana, India</p>
+                        <div className="column-rule-thin mb-6" style={{ borderColor: "var(--rule)" }} />
+
+                        {/* Lead paragraph */}
+                        <p
+                            className="font-sans text-base md:text-lg leading-relaxed"
+                            style={{ color: "var(--ink-faded)" }}
+                        >
+                            Designing intelligent, full-stack solutions that blend seamless
+                            user experiences with advanced AI capabilities — inspired by
+                            innovation and community impact.
+                        </p>
+                    </div>
+
+                    {/* Pull quote */}
+                    <blockquote className="pull-quote mt-8 mb-0">
+                        "Building things that feel less like software, and more like something
+                        that belongs in your hands."
+                    </blockquote>
+                </motion.div>
+
+                {/* ── CENTER COLUMN – Hero image ── */}
+                <div
+                    className="md:col-span-4 relative overflow-hidden border-r"
+                    style={{ minHeight: "55vh", borderColor: "var(--rule)" }}
+                >
+                    <motion.div style={{ y: imageY }} className="absolute inset-0 w-full h-[120%]">
+                        <motion.div
+                            animate={{ scale: [1, 1.04, 1], rotate: [0, 0.5, 0] }}
+                            transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
+                            className="w-full h-full relative"
+                        >
+                            <Image
+                                src="/Right Content.png"
+                                alt="Maheen Ilyas — AI & Software Engineer"
+                                fill
+                                className="object-cover"
+                                priority
+                            />
                         </motion.div>
                     </motion.div>
 
-                    <motion.p
-                        variants={itemVariants}
-                        className="text-lg md:text-xl text-black/60 max-w-sm mt-8 leading-relaxed"
+                    {/* Overlay caption */}
+                    <div
+                        className="absolute bottom-0 left-0 right-0 px-4 py-3"
+                        style={{ background: "rgba(26,26,26,0.75)" }}
                     >
-                        Designing intelligent, full-stack solutions that blend seamless user experiences with advanced AI capabilities — inspired by innovation and community impact.
-                    </motion.p>
+                        <p className="font-sans text-[10px] uppercase tracking-widest text-white/80">
+                            Software Engineer · Class of 2025 · B.E. Computer Science
+                        </p>
+                    </div>
+                </div>
+
+                {/* ── RIGHT COLUMN – sidebar stats ── */}
+                <motion.div
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 0.9, delay: 0.3, ease: "easeOut" }}
+                    className="md:col-span-3 flex flex-col px-6 py-10 md:py-16 gap-6"
+                >
+                    <div>
+                        <p className="section-label mb-3">At a Glance</p>
+                        <div className="column-rule-red mb-4" style={{ borderTopWidth: "2px", borderTopStyle: "solid", borderColor: "var(--red)" }} />
+                    </div>
+
+                    {[
+                        { label: "University", value: "Osmania University" },
+                        { label: "CGPA", value: "8.63 / 10" },
+                        { label: "Graduation", value: "Jul 2025" },
+                        
+                    ].map(({ label, value }) => (
+                        <div key={label} className="border-b pb-4" style={{ borderColor: "var(--rule)" }}>
+                            <p className="dateline mb-1">{label}</p>
+                            <p className="font-serif text-base font-bold" style={{ color: "var(--ink)" }}>{value}</p>
+                        </div>
+                    ))}
+
+                    {/* Social links */}
+                    <div className="mt-auto pt-4" style={{ borderTop: "1px solid var(--rule)" }}>
+                        <p className="dateline mb-3">Connect</p>
+                        <div className="flex flex-col gap-2">
+                            {[
+                                { label: "LinkedIn", href: "https://linkedin.com/in/maheen-ilyas" },
+                                { label: "GitHub", href: "https://github.com/Maheen-Ilyas" },
+                                { label: "Email", href: "mailto:mahilyaos05@gmail.com" },
+                            ].map(({ label, href }) => (
+                                <a
+                                    key={label}
+                                    href={href}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="font-sans text-xs font-semibold uppercase tracking-widest flex items-center gap-2 transition-colors group"
+                                    style={{ color: "var(--red)" }}
+                                >
+                                    <span className="w-4 h-px group-hover:w-8 transition-all duration-300" style={{ background: "var(--red)" }} />
+                                    {label}
+                                </a>
+                            ))}
+                        </div>
+                    </div>
                 </motion.div>
             </div>
 
-            <div className="relative h-[40vh] md:h-full w-full overflow-hidden bg-neutral-900 border-l border-black/5 order-last">
-                <motion.div
-                    style={{ y }}
-                    className="absolute inset-0 w-full h-[120%]"
-                >
-                    <motion.div
-                        animate={{ scale: [1, 1.05, 1], rotate: [0, 1, 0] }}
-                        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-                        className="w-full h-full relative"
-                    >
-                        <Image
-                            src="/Right Content.png"
-                            alt="Deep Learning and Design Illustration"
-                            fill
-                            className="object-cover"
-                            priority
-                        />
-                    </motion.div>
-                </motion.div>
+            {/* ── RED TICKER ── */}
+            <div
+                className="w-full ticker-wrap py-2 overflow-hidden flex"
+                style={{ background: "var(--red)" }}
+            >
+                <div className="ticker-inner flex items-center gap-0">
+                    {tickerItems.map((item, i) => (
+                        <span
+                            key={i}
+                            className="font-sans text-[11px] font-semibold uppercase tracking-widest text-white px-6 shrink-0"
+                        >
+                            {item}
+                            <span className="mx-4 opacity-50">✦</span>
+                        </span>
+                    ))}
+                </div>
             </div>
         </section>
     );

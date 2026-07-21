@@ -3,119 +3,186 @@ import Image from "next/image";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 
+const skills = [
+    { name: "C++", color: "#1565C0" },
+    { name: "Python", color: "#F9A825" },
+    { name: "JavaScript", color: "#F57F17" },
+    { name: "TypeScript", color: "#1976D2" },
+    { name: "Dart", color: "#0288D1" },
+    { name: "HTML", color: "#E64A19" },
+    { name: "CSS", color: "#00838F" },
+    { name: "Flutter", color: "#0288D1" },
+    { name: "React", color: "#0288D1" },
+    { name: "Next.js", color: "#1A1A1A" },
+    { name: "FastAPI", color: "#00695C" },
+    { name: "Firebase", color: "#FF8F00" },
+    { name: "Supabase", color: "#2E7D32" },
+    { name: "ChromaDB", color: "#C62828" },
+    { name: "PostgreSQL", color: "#1565C0" },
+    { name: "Git", color: "#BF360C" },
+    { name: "GitHub", color: "#1A1A1A" },
+    { name: "Pandas", color: "#AD1457" },
+    { name: "NumPy", color: "#00838F" },
+    { name: "Matplotlib", color: "#E64A19" },
+    { name: "Scikit-Learn", color: "#E65100" },
+    { name: "TensorFlow", color: "#BF360C" },
+    { name: "PyTorch", color: "#B71C1C" },
+    { name: "LangChain", color: "#00695C" },
+    { name: "Hugging Face", color: "#F9A825" },
+    { name: "Apktool", color: "#4527A0" },
+    { name: "Smali", color: "#4527A0" },
+    { name: "Dylib", color: "#558B2F" },
+    { name: "PyInstaller", color: "#1565C0" },
+];
+
 export default function About() {
     const containerRef = useRef(null);
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start end", "end start"],
     });
-
     const filmStripY = useTransform(scrollYProgress, [0, 1], ["0%", "20%"]);
-
-    const skills = [
-        { name: "Python", color: "border-yellow-400", hover: "hover:bg-yellow-400/20 hover:text-yellow-600", shadow: "shadow-[0_8px_20px_-6px_rgba(250,204,21,0.5)]" },
-        { name: "Dart", color: "border-blue-500", hover: "hover:bg-blue-500/20 hover:text-blue-700", shadow: "shadow-[0_8px_20px_-6px_rgba(59,130,246,0.5)]" },
-        { name: "HTML", color: "border-orange-400", hover: "hover:bg-orange-400/20 hover:text-orange-600", shadow: "shadow-[0_8px_20px_-6px_rgba(251,146,60,0.5)]" },
-        { name: "CSS", color: "border-cyan-400", hover: "hover:bg-cyan-400/20 hover:text-cyan-600", shadow: "shadow-[0_8px_20px_-6px_rgba(34,211,238,0.5)]" },
-        { name: "JavaScript", color: "border-yellow-300", hover: "hover:bg-yellow-300/20 hover:text-yellow-600", shadow: "shadow-[0_8px_20px_-6px_rgba(253,224,71,0.5)]" },
-        { name: "TypeScript", color: "border-blue-600", hover: "hover:bg-blue-600/20 hover:text-blue-800", shadow: "shadow-[0_8px_20px_-6px_rgba(37,99,235,0.5)]" },
-        { name: "Flutter", color: "border-sky-400", hover: "hover:bg-sky-400/20 hover:text-sky-600", shadow: "shadow-[0_8px_20px_-6px_rgba(56,189,248,0.5)]" },
-        { name: "React", color: "border-sky-500", hover: "hover:bg-sky-500/20 hover:text-sky-700", shadow: "shadow-[0_8px_20px_-6px_rgba(14,165,233,0.5)]" },
-        { name: "Next.js", color: "border-black", hover: "hover:bg-black/10 hover:text-black", shadow: "shadow-[0_8px_20px_-6px_rgba(0,0,0,0.2)]" },
-        { name: "FastAPI", color: "border-emerald-400", hover: "hover:bg-emerald-400/20 hover:text-emerald-700", shadow: "shadow-[0_8px_20px_-6px_rgba(52,211,153,0.5)]" },
-        { name: "Firebase", color: "border-amber-400", hover: "hover:bg-amber-400/20 hover:text-amber-700", shadow: "shadow-[0_8px_20px_-6px_rgba(251,191,36,0.5)]" },
-        { name: "Supabase", color: "border-emerald-500", hover: "hover:bg-emerald-500/20 hover:text-emerald-700", shadow: "shadow-[0_8px_20px_-6px_rgba(16,185,129,0.5)]" },
-        { name: "ChromDB", color: "border-red-400", hover: "hover:bg-red-400/20 hover:text-red-700", shadow: "shadow-[0_8px_20px_-6px_rgba(248,113,113,0.5)]" },
-        { name: "Git", color: "border-orange-500", hover: "hover:bg-orange-500/20 hover:text-orange-700", shadow: "shadow-[0_8px_20px_-6px_rgba(249,115,22,0.5)]" },
-        { name: "GitHub", color: "border-gray-800", hover: "hover:bg-gray-800/20 hover:text-gray-900", shadow: "shadow-[0_8px_20px_-6px_rgba(31,41,55,0.5)]" },
-        { name: "Pandas", color: "border-pink-400", hover: "hover:bg-pink-400/20 hover:text-pink-700", shadow: "shadow-[0_8px_20_rgba(244,114,182,0.5)]" },
-        { name: "NumPy", color: "border-cyan-500", hover: "hover:bg-cyan-500/20 hover:text-cyan-700", shadow: "shadow-[0_8px_20px_-6px_rgba(6,182,212,0.5)]" },
-        { name: "Matplotlib", color: "border-orange-400", hover: "hover:bg-orange-400/20 hover:text-orange-700", shadow: "shadow-[0_8px_20px_-6px_rgba(251,146,60,0.5)]" },
-        { name: "Scikit-Learn", color: "border-orange-400", hover: "hover:bg-orange-400/20 hover:text-orange-700", shadow: "shadow-[0_8px_20px_-6px_rgba(251,146,60,0.5)]" },
-        { name: "TensorFlow", color: "border-orange-600", hover: "hover:bg-orange-600/20 hover:text-orange-800", shadow: "shadow-[0_8px_20px_-6px_rgba(234,88,12,0.5)]" },
-        { name: "PyTorch", color: "border-rose-500", hover: "hover:bg-rose-500/20 hover:text-rose-700", shadow: "shadow-[0_8px_20px_-6px_rgba(244,63,94,0.5)]" },
-        { name: "LangChain", color: "border-teal-500", hover: "hover:bg-teal-500/20 hover:text-teal-700", shadow: "shadow-[0_8px_20px_-6px_rgba(20,184,166,0.5)]" },
-        { name: "Hugging Face", color: "border-yellow-500", hover: "hover:bg-yellow-500/20 hover:text-yellow-700", shadow: "shadow-[0_8px_20px_-6px_rgba(234,179,8,0.5)]" },
-    ];
-
-    const containerVariants = {
-        hidden: { opacity: 0, y: 30 },
-        visible: {
-            opacity: 1,
-            y: 0,
-            transition: {
-                duration: 0.8,
-                staggerChildren: 0.05,
-            },
-        },
-    };
-
-    const itemVariants = {
-        hidden: { opacity: 0, scale: 0.9 },
-        visible: { opacity: 1, scale: 1 },
-    };
-
     const constraintsRef = useRef(null);
 
     return (
-        <section ref={containerRef} id="about" className="py-32 border-t border-foreground/5 relative overflow-hidden">
-            <motion.div
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-100px" }}
-                className="grid grid-cols-1 md:grid-cols-2 gap-16 items-start relative z-10"
+        <section
+            ref={containerRef}
+            id="about"
+            className="border-t"
+            style={{ borderColor: "var(--rule)", background: "var(--cream)" }}
+        >
+            {/* Section header bar */}
+            <div
+                className="px-6 md:px-12 py-4 flex items-center justify-between border-b"
+                style={{ borderColor: "var(--rule)" }}
             >
-                <div className="space-y-8">
-                    <h2 className="text-sm font-medium uppercase mb-8 opacity-40 italic tracking-widest text-black/50">01 / About</h2>
-                    <h1 className="text-4xl md:text-6xl font-bold text-black tracking-tighter">
-                        The Journey so Far.
-                    </h1>
+                <p className="section-label">01 / About</p>
+                <div className="flex-1 mx-6 border-t" style={{ borderColor: "var(--rule)" }} />
+                <p className="dateline">The Journey so Far</p>
+            </div>
 
-                    <motion.div ref={constraintsRef} className="flex flex-wrap gap-3 max-w-xl relative">
+            {/* Main grid */}
+            <div className="grid grid-cols-1 md:grid-cols-12 border-b" style={{ borderColor: "var(--rule)" }}>
+
+                {/* Headline column */}
+                <div
+                    className="md:col-span-4 px-6 md:px-12 py-12 border-r flex flex-col justify-between"
+                    style={{ borderColor: "var(--rule)" }}
+                >
+                    <div>
+                        <motion.h1
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8 }}
+                            className="font-serif text-4xl md:text-5xl font-black leading-tight tracking-tight mb-6"
+                            style={{ color: "var(--ink)" }}
+                        >
+                            The Journey<br />so Far.
+                        </motion.h1>
+
+                        <div className="column-rule-red mb-6" style={{ borderTopWidth: "2px", borderTopStyle: "solid", borderColor: "var(--red)" }} />
+
+                        <motion.p
+                            initial={{ opacity: 0, y: 16 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: 0.15 }}
+                            className="font-sans text-base leading-relaxed drop-cap"
+                            style={{ color: "var(--ink-faded)" }}
+                        >
+                            I didn&apos;t start off with AI, big projects, or a very refined tech stack.
+                            I started with curiosity. That small spark grew into building apps, leading communities, and exploring how artificial
+                            intelligence can transform everyday experiences.
+                        </motion.p>
+
+                        <motion.p
+                            initial={{ opacity: 0, y: 16 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.8, delay: 0.25 }}
+                            className="font-sans text-base leading-relaxed mt-4"
+                            style={{ color: "var(--ink-faded)" }}
+                        >
+                            Today, I&apos;m still chasing that spark — crafting solutions that feel less like software,
+                            and more like something that belongs in your hands.
+                        </motion.p>
+                    </div>
+
+                    {/* Research interests */}
+                    <div className="mt-8">
+                        <p className="dateline mb-3">Research Interests</p>
+                        <div className="column-rule-thin mb-3" style={{ borderColor: "var(--rule)" }} />
+                        <div className="flex flex-wrap gap-2">
+                            {["Machine Learning", "Retrieval-Augmented Generation", "Fine-tuning", "Applied Deep Learning"].map(i => (
+                                <span key={i} className="tag-pill tag-pill-red">{i}</span>
+                            ))}
+                        </div>
+                    </div>
+                </div>
+
+                {/* Skills / classifieds column */}
+                <div
+                    className="md:col-span-8 px-6 md:px-12 py-12"
+                >
+                    <p className="dateline mb-4">Technical Skills — Drag to explore</p>
+                    <div className="column-rule mb-6" style={{ borderTopWidth: "3px", borderTopStyle: "double", borderColor: "var(--ink)" }} />
+
+                    <motion.div
+                        ref={constraintsRef}
+                        initial="hidden"
+                        whileInView="visible"
+                        viewport={{ once: true, margin: "-80px" }}
+                        variants={{
+                            hidden: { opacity: 0, y: 20 },
+                            visible: { opacity: 1, y: 0, transition: { staggerChildren: 0.04, duration: 0.6 } },
+                        }}
+                        className="flex flex-wrap gap-2 relative"
+                    >
                         {skills.map((skill) => (
                             <motion.span
                                 key={skill.name}
-                                variants={itemVariants}
+                                variants={{ hidden: { opacity: 0, scale: 0.85 }, visible: { opacity: 1, scale: 1 } }}
                                 drag
                                 dragConstraints={constraintsRef}
                                 dragElastic={0.8}
                                 dragTransition={{ bounceStiffness: 200, bounceDamping: 10 }}
-                                whileDrag={{ scale: 1.1, cursor: "grabbing", zIndex: 10 }}
-                                className={`px-4 py-1 border-2 ${skill.color} ${skill.shadow} ${skill.hover} rounded-full text-xs font-semibold transition-all duration-300 hover:translate-y-[-4px] cursor-grab`}
+                                whileDrag={{ scale: 1.12, zIndex: 10 }}
+                                whileHover={{ y: -3 }}
+                                className="tag-pill cursor-grab select-none transition-all duration-200 hover:text-white"
+                                style={{ borderColor: skill.color + "55", color: skill.color }}
+                                onMouseEnter={e => {
+                                    (e.currentTarget as HTMLElement).style.background = skill.color;
+                                    (e.currentTarget as HTMLElement).style.color = "#fff";
+                                    (e.currentTarget as HTMLElement).style.borderColor = skill.color;
+                                }}
+                                onMouseLeave={e => {
+                                    (e.currentTarget as HTMLElement).style.background = "transparent";
+                                    (e.currentTarget as HTMLElement).style.color = skill.color;
+                                    (e.currentTarget as HTMLElement).style.borderColor = skill.color + "55";
+                                }}
                             >
                                 {skill.name}
                             </motion.span>
                         ))}
                     </motion.div>
-                </div>
 
-                <div className="space-y-8 text-xl text-black/70 leading-relaxed md:pt-4">
-                    <p className="first-letter:text-5xl first-letter:font-bold first-letter:mr-3 first-letter:float-left first-letter:text-black">
-                        I didn’t start off with AI, big projects, or a very refined tech stack.
-                        I started with curiosity. That small spark grew into building apps, leading communities, and exploring how artificial
-                        intelligence can transform everyday experiences.
-                    </p>
-                    <p>
-                        Today, I’m still chasing that spark — crafting solutions that feel less like software,
-                        and more like something that belongs in your hands.
-                    </p>
+                    {/* Film strip decorative */}
+                    <motion.div
+                        style={{ y: filmStripY }}
+                        className="mt-12 flex justify-end opacity-10 grayscale pointer-events-none"
+                    >
+                        <div className="relative w-full md:w-[65%] aspect-[4/1]">
+                            <Image
+                                src="/Film Strip.png"
+                                alt="Decorative Film Strip"
+                                fill
+                                className="object-contain object-right-bottom"
+                            />
+                        </div>
+                    </motion.div>
                 </div>
-            </motion.div>
-
-            <motion.div
-                style={{ y: filmStripY }}
-                className="mt-8 md:-mt-40 flex justify-end opacity-20 grayscale brightness-125 pointer-events-none"
-            >
-                <div className="relative w-full md:w-[60%] aspect-[4/1] pointer-events-none">
-                    <Image
-                        src="/Film Strip.png"
-                        alt="Decorative Film Strip"
-                        fill
-                        className="object-contain object-right-bottom"
-                    />
-                </div>
-            </motion.div>
+            </div>
         </section>
     );
 }
