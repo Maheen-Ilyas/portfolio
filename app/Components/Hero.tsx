@@ -97,38 +97,6 @@ export default function Hero() {
                     </blockquote>
                 </motion.div>
 
-                {/* ── CENTER COLUMN – Hero image ── */}
-                <div
-                    className="md:col-span-4 relative overflow-hidden border-r min-h-[350px] md:min-h-[420px]"
-                    style={{ borderColor: "var(--rule)" }}
-                >
-                    <motion.div style={{ y: imageY }} className="absolute inset-0 w-full h-[115%]">
-                        <motion.div
-                            animate={{ scale: [1, 1.03, 1], rotate: [0, 0.5, 0] }}
-                            transition={{ duration: 22, repeat: Infinity, ease: "linear" }}
-                            className="w-full h-full relative"
-                        >
-                            <Image
-                                src="/Right Content.png"
-                                alt="Maheen Ilyas — AI & Software Engineer"
-                                fill
-                                className="object-cover"
-                                priority
-                            />
-                        </motion.div>
-                    </motion.div>
-
-                    {/* Overlay caption */}
-                    <div
-                        className="absolute bottom-0 left-0 right-0 px-4 py-2.5"
-                        style={{ background: "rgba(26,26,26,0.8)" }}
-                    >
-                        <p className="font-sans text-[10px] uppercase tracking-widest text-white/90">
-                            Software Engineer · Class of 2025 · B.E. Computer Science
-                        </p>
-                    </div>
-                </div>
-
                 {/* ── RIGHT COLUMN – sidebar stats ── */}
                 <motion.div
                     initial={{ opacity: 0, x: 20 }}
@@ -142,12 +110,9 @@ export default function Hero() {
                     </div>
 
                     {[
-                        { label: "CGPA", value: "8.63 / 10" },
                         { label: "University", value: "Osmania University" },
+                        { label: "CGPA", value: "8.63 / 10" },
                         { label: "Graduation", value: "Jul 2025" },
-                        { label: "Current Role", value: "Software Engineer" },
-                        { label: "Location", value: "Telangana, India" },
-                        { label: "Specialisation", value: "AI & ML Systems" },
                     ].map(({ label, value }) => (
                         <div key={label} className="border-b pb-2.5" style={{ borderColor: "var(--rule)" }}>
                             <p className="dateline mb-0.5" style={{ fontSize: "0.6rem" }}>{label}</p>

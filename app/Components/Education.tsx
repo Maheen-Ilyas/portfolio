@@ -63,7 +63,6 @@ export default function Education() {
                             {[
                                 { label: "Degree", value: "B.E. Computer Science & Engineering" },
                                 { label: "Duration", value: "Dec 2021 – Jul 2025" },
-                                { label: "CGPA", value: "8.63 / 10  (3.6 / 4.0)" },
                                 { label: "Status", value: "Graduated" },
                             ].map(({ label, value }, i) => (
                                 <div
@@ -117,14 +116,6 @@ export default function Education() {
                                 </p>
                             </motion.div>
                         ))}
-                    </div>
-
-                    {/* Decorative quote */}
-                    <div className="mt-12 pt-8 border-t" style={{ borderColor: "var(--rule)" }}>
-                        <blockquote className="pull-quote text-xl md:text-2xl">
-                            &quot;Four years of data structures, distributed systems, and deep learning
-                            — all converging into a single thesis: technology should serve people.&quot;
-                        </blockquote>
                     </div>
                 </motion.div>
             </div>

@@ -51,7 +51,6 @@ export default function About() {
             className="border-t"
             style={{ borderColor: "var(--rule)", background: "var(--cream)" }}
         >
-            {/* Section header bar */}
             <div
                 className="px-6 md:px-12 py-4 flex items-center justify-between border-b"
                 style={{ borderColor: "var(--rule)" }}

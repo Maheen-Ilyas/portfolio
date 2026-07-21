@@ -2,14 +2,17 @@
 @import "tailwindcss";
 
 :root {
-  --background: #F5F0E8;
-  --foreground: #1A1A1A;
-  --ink: #1A1A1A;
-  --ink-faded: rgba(26, 26, 26, 0.45);
-  --red: #C41E2A;
-  --cream: #F5F0E8;
-  --paper: #EDE8DC;
-  --rule: rgba(26, 26, 26, 0.15);
+  --background: #F8F5EE;
+  --foreground: #111827;
+  --ink: #111827;
+  --ink-faded: rgba(17, 24, 39, 0.65);
+  --cobalt: #1D4ED8;
+  --cobalt-light: #3B82F6;
+  --cobalt-bg: rgba(29, 78, 216, 0.08);
+  --red: #1D4ED8; /* Mapping red tokens to Cobalt Blue */
+  --cream: #F8F5EE;
+  --paper: #EFECE6;
+  --rule: rgba(17, 24, 39, 0.12);
   --font-serif: 'Playfair Display', Georgia, serif;
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-fraktur: 'UnifrakturMaguntia', cursive;
@@ -27,7 +30,7 @@
 }
 
 ::selection {
-  background-color: var(--red);
+  background-color: var(--cobalt);
   color: #ffffff;
 }
 
@@ -50,8 +53,8 @@ body {
 /* ─── Custom Scrollbar ─── */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-track { background: var(--paper); }
-::-webkit-scrollbar-thumb { background: rgba(26,26,26,0.2); border-radius: 10px; transition: background 0.3s; }
-::-webkit-scrollbar-thumb:hover { background: rgba(26,26,26,0.45); }
+::-webkit-scrollbar-thumb { background: rgba(29, 78, 216, 0.25); border-radius: 10px; transition: background 0.3s; }
+::-webkit-scrollbar-thumb:hover { background: var(--cobalt); }
 
 /* ─── Lenis ─── */
 html.lenis, html.lenis body { height: auto; }
@@ -71,7 +74,7 @@ html.lenis, html.lenis body { height: auto; }
   animation: noiseAnimation 0.5s infinite steps(2);
 }
 
-/* ─── Broadsheet Typography ─── */
+/* ─── Typography & Editorial Utils ─── */
 .font-serif { font-family: var(--font-serif); }
 .font-sans { font-family: var(--font-sans); }
 .font-fraktur { font-family: var(--font-fraktur); }
@@ -81,36 +84,36 @@ html.lenis, html.lenis body { height: auto; }
   letter-spacing: 0.05em;
 }
 
-/* ─── Horizontal Column Rule ─── */
+/* ─── Horizontal Column Rules ─── */
 .column-rule {
   border-top: 3px double var(--ink);
 }
 .column-rule-thin {
   border-top: 1px solid var(--rule);
 }
-.column-rule-red {
-  border-top: 2px solid var(--red);
+.column-rule-red, .column-rule-cobalt {
+  border-top: 2px solid var(--cobalt);
 }
 
 /* ─── Editorial Drop Cap ─── */
 .drop-cap::first-letter {
   font-family: var(--font-serif);
-  font-size: 5rem;
+  font-size: 4.8rem;
   font-weight: 900;
   line-height: 0.75;
   float: left;
-  margin-right: 0.15em;
+  margin-right: 0.18em;
   margin-top: 0.1em;
-  color: var(--ink);
+  color: var(--cobalt);
 }
 
 /* ─── Pull Quote ─── */
 .pull-quote {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: 1.5rem;
-  line-height: 1.4;
-  border-left: 4px solid var(--red);
+  font-size: 1.4rem;
+  line-height: 1.45;
+  border-left: 4px solid var(--cobalt);
   padding-left: 1.25rem;
   color: var(--ink);
 }
@@ -125,21 +128,21 @@ html.lenis, html.lenis body { height: auto; }
   color: var(--ink-faded);
 }
 
-/* ─── Section Label (replaces 01/About etc.) ─── */
+/* ─── Section Label ─── */
 .section-label {
   font-family: var(--font-sans);
   font-size: 0.65rem;
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: var(--red);
+  color: var(--cobalt);
   opacity: 1;
 }
 
 /* ─── Newspaper Clipping Card ─── */
 .clipping-card {
-  background: var(--cream);
-  border: 1px solid rgba(26,26,26,0.12);
+  background: var(--paper);
+  border: 1px solid var(--rule);
   position: relative;
 }
 
@@ -148,10 +151,10 @@ html.lenis, html.lenis body { height: auto; }
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 3px;
-  background: var(--red);
+  background: var(--cobalt);
 }
 
-/* ─── Red Ticker ─── */
+/* ─── Cobalt Ticker ─── */
 .ticker-wrap {
   overflow: hidden;
   white-space: nowrap;
@@ -173,39 +176,21 @@ html.lenis, html.lenis body { height: auto; }
   font-weight: 600;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  border: 1px solid rgba(26,26,26,0.25);
-  padding: 0.2rem 0.65rem;
+  border: 1px solid rgba(29, 78, 216, 0.25);
+  padding: 0.25rem 0.65rem;
   border-radius: 2px;
   color: var(--ink);
   transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
 .tag-pill:hover {
-  background: var(--ink);
-  color: var(--cream);
-  border-color: var(--ink);
+  background: var(--cobalt);
+  color: #ffffff;
+  border-color: var(--cobalt);
 }
-.tag-pill-red {
-  border-color: var(--red);
-  color: var(--red);
-}
-
-/* ─── Broadsheet Grid ─── */
-.broadsheet-grid {
-  display: grid;
-  column-gap: 1.5rem;
-}
-
-/* ─── Torn paper / clipping edge ─── */
-.torn-top {
-  position: relative;
-}
-.torn-top::before {
-  content: '';
-  position: absolute;
-  top: -8px; left: 0; right: 0;
-  height: 8px;
-  background: radial-gradient(ellipse at 50% 0%, transparent 70%, var(--cream) 70%) repeat-x;
-  background-size: 16px 8px;
+.tag-pill-red, .tag-pill-cobalt {
+  border-color: var(--cobalt);
+  color: var(--cobalt);
+  background: var(--cobalt-bg);
 }
 
 @keyframes noiseAnimation {

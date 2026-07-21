@@ -18,7 +18,7 @@ export default function TopNavigation({ scrolled }: { scrolled: boolean }) {
                 boxShadow: scrolled ? "0 4px 20px rgba(0,0,0,0.06)" : "none",
             }}
         >
-            {/* Top red bar — issue & date line (hidden when scrolled) */}
+            {/* Top red bar — issue & date line */}
             {!scrolled && (
                 <div
                     className="w-full px-4 md:px-12 py-1 flex justify-between items-center transition-all duration-300"

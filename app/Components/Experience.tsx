@@ -164,12 +164,6 @@ export default function Experience() {
             company: "Google Developer Student Clubs",
             location: "On-site",
         },
-        {
-            year: "May 2024 – Aug 2024",
-            role: "Open-Source Contributor",
-            company: "GirlScript Summer of Code",
-            location: "Remote",
-        },
     ];
 
     return (
