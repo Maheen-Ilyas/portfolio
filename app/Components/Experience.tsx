@@ -177,7 +177,7 @@ export default function Experience() {
                 className="px-6 md:px-12 py-4 flex items-center justify-between border-b"
                 style={{ borderColor: "var(--rule)" }}
             >
-                <p className="section-label">03 / Experience</p>
+                <p className="section-label">02 / Experience</p>
                 <div className="flex-1 mx-6 border-t" style={{ borderColor: "var(--rule)" }} />
                 <p className="dateline">The Chapters</p>
             </div>

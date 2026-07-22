@@ -124,7 +124,7 @@ export default function About() {
                 <div
                     className="md:col-span-8 px-6 md:px-12 py-12"
                 >
-                    <p className="dateline mb-4">Technical Skills — Drag to explore</p>
+                    <p className="dateline mb-4">Technical Skills</p>
                     <div className="column-rule mb-6" style={{ borderTopWidth: "3px", borderTopStyle: "double", borderColor: "var(--ink)" }} />
 
                     <motion.div
@@ -171,12 +171,12 @@ export default function About() {
                         style={{ y: filmStripY }}
                         className="mt-12 flex justify-end opacity-10 grayscale pointer-events-none"
                     >
-                        <div className="relative w-full md:w-[65%] aspect-[4/1]">
+                        <div className="relative w-full md:w-[65%] aspect-4/1">
                             <Image
                                 src="/Film Strip.png"
                                 alt="Decorative Film Strip"
                                 fill
-                                className="object-contain object-right-bottom"
+                                className="object-contain object-bottom-right"
                             />
                         </div>
                     </motion.div>

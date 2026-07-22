@@ -5,14 +5,14 @@ import { useRef } from "react";
 
 const TICKER_ITEMS = [
     "AI-Driven Engineer",
-    "FastAPI · Next.js · Flutter",
+    "FastAPI",
+    "Next.js",
+    "Flutter",
     "RAG & LLM Systems",
-    "TensorFlow · PyTorch",
-    "Open-Source Contributor",
-    "GDG Chief Coordinator",
+    "TensorFlow",
+    "PyTorch",
     "Full-Stack Developer",
     "Deep Learning Researcher",
-    "mahilyaos05@gmail.com",
 ];
 
 export default function Hero() {
@@ -76,7 +76,7 @@ export default function Hero() {
 
                         {/* Byline rule */}
                         <div className="column-rule-thin mb-3" style={{ borderColor: "var(--rule)" }} />
-                        <p className="dateline mb-3">By Maheen Ilyas · Telangana, India</p>
+                        <p className="dateline mb-3">By Maheen Ilyas</p>
                         <div className="column-rule-thin mb-5" style={{ borderColor: "var(--rule)" }} />
 
                         {/* Lead paragraph */}
@@ -89,12 +89,6 @@ export default function Hero() {
                             innovation and community impact.
                         </p>
                     </div>
-
-                    {/* Pull quote */}
-                    <blockquote className="pull-quote mt-6 mb-0 text-sm md:text-base">
-                        &ldquo;Building things that feel less like software, and more like something
-                        that belongs in your hands.&rdquo;
-                    </blockquote>
                 </motion.div>
 
                 {/* ── RIGHT COLUMN – sidebar stats ── */}
@@ -104,21 +98,11 @@ export default function Hero() {
                     transition={{ duration: 0.9, delay: 0.3, ease: "easeOut" }}
                     className="md:col-span-3 flex flex-col px-6 py-6 md:py-10 gap-4"
                 >
-                    <div>
-                        <p className="section-label mb-2">At a Glance</p>
-                        <div className="column-rule-red mb-3" style={{ borderTopWidth: "2px", borderTopStyle: "solid", borderColor: "var(--red)" }} />
-                    </div>
-
-                    {[
-                        { label: "University", value: "Osmania University" },
-                        { label: "CGPA", value: "8.63 / 10" },
-                        { label: "Graduation", value: "Jul 2025" },
-                    ].map(({ label, value }) => (
-                        <div key={label} className="border-b pb-2.5" style={{ borderColor: "var(--rule)" }}>
-                            <p className="dateline mb-0.5" style={{ fontSize: "0.6rem" }}>{label}</p>
-                            <p className="font-serif text-sm font-bold" style={{ color: "var(--ink)" }}>{value}</p>
-                        </div>
-                    ))}
+                    {/* Pull quote */}
+                    <blockquote className="pull-quote w-xl mt-6 mb-0 text-sm md:text-base">
+                        &ldquo;Building things that feel less like software, and more like something
+                        that belongs in your hands.&rdquo;
+                    </blockquote>
 
                     {/* Social links */}
                     <div className="mt-auto pt-3" style={{ borderTop: "1px solid var(--rule)" }}>

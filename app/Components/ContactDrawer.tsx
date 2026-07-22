@@ -62,7 +62,7 @@ export default function ContactDrawer({ isOpen, onClose }: ContactDrawerProps) {
                         animate={{ opacity: 1 }}
                         exit={{ opacity: 0 }}
                         onClick={onClose}
-                        className="fixed inset-0 z-[100] cursor-pointer"
+                        className="fixed inset-0 z-100 cursor-pointer"
                         style={{ background: "rgba(26,26,26,0.5)", backdropFilter: "blur(4px)" }}
                     />
 
@@ -75,7 +75,7 @@ export default function ContactDrawer({ isOpen, onClose }: ContactDrawerProps) {
                         data-lenis-prevent
                         data-lenis-prevent-wheel
                         data-lenis-prevent-touch
-                        className="fixed right-0 top-0 bottom-0 w-[100vw] md:w-[500px] z-[101] flex flex-col border-l overscroll-contain"
+                        className="fixed right-0 top-0 bottom-0 w-screen md:w-125 z-101 flex flex-col border-l overscroll-contain"
                         style={{ background: "var(--cream)", borderColor: "var(--rule)" }}
                     >
                         {/* Red top bar */}

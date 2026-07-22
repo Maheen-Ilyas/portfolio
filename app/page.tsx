@@ -5,7 +5,6 @@ import TopNavigation from "./Components/TopNavigation";
 import BottomNavigation from "./Components/BottomNavigation";
 import Hero from "./Components/Hero";
 import About from "./Components/About";
-import Education from "./Components/Education";
 import Experience from "./Components/Experience";
 import Projects from "./Components/Projects";
 import ContactDrawer from "./Components/ContactDrawer";
@@ -32,7 +31,7 @@ export default function Home() {
             initial={{ y: 0 }}
             exit={{ y: "-100%" }}
             transition={{ duration: 1.2, ease: [0.76, 0, 0.24, 1] }}
-            className="fixed inset-0 z-[1000] pointer-events-none flex items-center justify-center"
+            className="fixed inset-0 z-1000 pointer-events-none flex items-center justify-center"
             style={{ background: "var(--ink)" }}
           >
             <motion.div
@@ -61,7 +60,6 @@ export default function Home() {
 
           <div className="relative z-10">
             <About />
-            <Education />
             <Experience />
             <Projects />
 

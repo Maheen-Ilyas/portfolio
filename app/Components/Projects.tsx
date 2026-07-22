@@ -39,7 +39,7 @@ const projects = [
         id: "03",
         title: "PawPal",
         category: "Mobile Application · AI",
-        dates: "2024",
+        dates: "Dec 2024 - Jan 2025",
         badge: "Gemini API · Emergency Locator",
         lead: "All-in-one pet care platform featuring AI emergency assistance and vet discovery.",
         description:
@@ -78,7 +78,7 @@ function ProjectFlipCard({ project }: { project: typeof projects[0] }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6 }}
-            className="w-full h-[480px] md:h-[460px] cursor-pointer perspective-1000 group"
+            className="w-full h-120 md:h-115 cursor-pointer perspective-1000 group"
             onClick={() => setIsFlipped(!isFlipped)}
             onMouseEnter={() => setIsFlipped(true)}
             onMouseLeave={() => setIsFlipped(false)}
@@ -109,7 +109,7 @@ function ProjectFlipCard({ project }: { project: typeof projects[0] }) {
                         <div className="column-rule mb-5" style={{ borderTopWidth: "3px", borderTopStyle: "double", borderColor: "var(--ink)" }} />
 
                         {/* Title */}
-                        <h3 className="font-serif text-3xl md:text-4xl font-black tracking-tight mb-3 group-hover:text-[var(--cobalt)] transition-colors">
+                        <h3 className="font-serif text-3xl md:text-4xl font-black tracking-tight mb-3 group-hover:text-(--cobalt) transition-colors">
                             {project.title}
                         </h3>
 
@@ -219,7 +219,7 @@ export default function Projects() {
                 className="px-6 md:px-12 py-4 flex items-center justify-between border-b"
                 style={{ borderColor: "var(--rule)" }}
             >
-                <p className="section-label">04 / Projects</p>
+                <p className="section-label">03 / Projects</p>
                 <div className="flex-1 mx-6 border-t" style={{ borderColor: "var(--rule)" }} />
                 <p className="dateline">Built Along the Way</p>
             </div>

@@ -24,9 +24,6 @@ export default function TopNavigation({ scrolled }: { scrolled: boolean }) {
                     className="w-full px-4 md:px-12 py-1 flex justify-between items-center transition-all duration-300"
                     style={{ background: "var(--red)" }}
                 >
-                    <span className="text-[10px] font-sans font-semibold tracking-widest uppercase text-white/90">
-                        Est. 2021 · Telangana, India
-                    </span>
                     <span className="text-[10px] font-sans font-semibold tracking-widest uppercase text-white/90 hidden sm:inline">
                         {date || "MONDAY, JULY 21, 2026"}
                     </span>

@@ -54,7 +54,7 @@ export default function CustomCursor() {
                     y: smoothY,
                     opacity: isVisible ? 1 : 0,
                 }}
-                className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference"
+                className="fixed top-0 left-0 pointer-events-none z-9999 mix-blend-difference"
             >
                 <div
                     className={`flex items-center justify-center -translate-x-1/2 -translate-y-1/2 rounded-full border border-white transition-all duration-300 ease-out ${isPointer ? "w-16 h-16 bg-white/10" : "w-10 h-10 bg-transparent"
@@ -69,7 +69,7 @@ export default function CustomCursor() {
                     y: mouseY,
                     opacity: isVisible ? 1 : 0,
                 }}
-                className="fixed top-0 left-0 pointer-events-none z-[9999] mix-blend-difference"
+                className="fixed top-0 left-0 pointer-events-none z-9999 mix-blend-difference"
             >
                 <div
                     className={`bg-white rounded-full -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ${isPointer ? "w-0 h-0" : "w-2 h-2"
