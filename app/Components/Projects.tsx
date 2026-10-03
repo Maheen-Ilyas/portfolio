@@ -148,16 +148,6 @@ export default function Projects() {
             </div>
           </div>
         </div>
-
-        <p className="font-serif italic text-secondary-fixed/70 mt-12 text-lg">
-          <span
-            className="text-secondary-container not-italic font-bold text-2xl align-middle mr-2"
-            data-cursor="Steal"
-          >
-            *
-          </span>
-          Four exhibits. All admissible.
-        </p>
       </div>
     </section>
   );

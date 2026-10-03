@@ -5,18 +5,19 @@ export default function BottomNavigation({
 }: {
   onContactClick: () => void;
 }) {
-  const link =
-    "px-4 py-2 rounded-full text-sm text-white/80 hover:text-white hover:bg-white/10 transition-colors";
+  const item =
+    "flex-1 text-center px-4 py-2.5 rounded-full text-sm font-medium text-primary hover:bg-secondary-fixed transition-colors";
+
   return (
     <nav
       aria-label="Quick links"
-      className="fixed bottom-5 left-1/2 -translate-x-1/2 z-50 flex items-center gap-1 rounded-full bg-primary/90 backdrop-blur-md p-1.5 shadow-xl shadow-primary/30"
+      className="fixed bottom-4 inset-x-4 md:inset-x-8 z-50 flex items-center rounded-full bg-white/70 backdrop-blur-md border border-outline-variant/50 p-2"
     >
       <a
         href="https://linkedin.com/in/maheen-ilyas"
         target="_blank"
         rel="noopener noreferrer"
-        className={link}
+        className={item}
         data-cursor="Connect"
       >
         LinkedIn
@@ -25,16 +26,12 @@ export default function BottomNavigation({
         href="https://github.com/Maheen-Ilyas"
         target="_blank"
         rel="noopener noreferrer"
-        className={link}
+        className={item}
         data-cursor="View"
       >
         GitHub
       </a>
-      <button
-        onClick={onContactClick}
-        data-cursor="Write"
-        className="px-5 py-2 rounded-full text-sm font-semibold bg-secondary-container text-primary hover:bg-secondary-fixed transition-colors"
-      >
+      <button onClick={onContactClick} className={item} data-cursor="Write">
         Contact
       </button>
     </nav>

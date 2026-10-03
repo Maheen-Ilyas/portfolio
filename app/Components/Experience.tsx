@@ -123,16 +123,6 @@ export default function Experience() {
             );
           })}
         </div>
-
-        <p className="font-serif italic text-on-surface-variant mt-10 text-lg">
-          <span
-            className="text-secondary not-italic font-bold text-2xl align-middle mr-2"
-            data-cursor="Steal"
-          >
-            *
-          </span>
-          Three methods. One motive.
-        </p>
       </div>
     </section>
   );

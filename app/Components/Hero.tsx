@@ -11,16 +11,12 @@ export default function Hero({
       id="hero"
       className="min-h-screen pt-32 pb-20 px-6 md:px-12 flex flex-col justify-center relative overflow-hidden"
     >
-      {/* Soft purple orbs */}
+      {/* Flat lilac disc, no gradient */}
       <motion.div
         aria-hidden
         animate={{ y: [0, -24, 0] }}
         transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute -top-24 -right-24 w-136 h-136 rounded-full bg-secondary-fixed-dim/60 blur-[100px]"
-      />
-      <div
-        aria-hidden
-        className="absolute -bottom-32 -left-24 w-104 h-104 rounded-full bg-secondary-container/25 blur-[100px]"
+        className="absolute top-24 -right-32 w-120 h-120 rounded-full bg-secondary-fixed"
       />
 
       <div className="max-w-7xl mx-auto w-full relative z-10">
@@ -45,8 +41,9 @@ export default function Hero({
             </motion.span>
           </span>
           <span className="flex items-start gap-3 overflow-hidden pb-2">
+            {/* Outlined letters that fill in on hover */}
             <motion.span
-              className="block bg-linear-to-r from-secondary via-secondary-container to-brand-mid bg-clip-text text-transparent"
+              className="block text-transparent [-webkit-text-stroke:2px_#300033] md:[-webkit-text-stroke:3px_#300033] hover:text-secondary hover:[-webkit-text-stroke-color:#8234c6] transition-colors duration-300"
               initial={{ y: "100%" }}
               animate={{ y: 0 }}
               transition={{
@@ -54,6 +51,7 @@ export default function Hero({
                 delay: 0.2,
                 ease: [0.16, 1, 0.3, 1],
               }}
+              data-cursor="Fill"
             >
               Intelligence
             </motion.span>

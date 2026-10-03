@@ -22,9 +22,9 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  title: "Maheen Ilyas — Software Engineer & AI Researcher",
+  title: "Software Engineer & AI Researcher",
   description:
-    "Portfolio of Maheen Ilyas — Software Engineer specialising in AI, full-stack development, and deep learning. Based in Telangana, India.",
+    "Software Engineer specialising in AI, full-stack development, and deep learning.",
 };
 
 export default function RootLayout({

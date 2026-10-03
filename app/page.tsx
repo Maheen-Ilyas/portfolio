@@ -131,8 +131,8 @@ export default function Home() {
           </div>
         </section>
 
-        <footer className="py-8 pb-28 px-6 md:px-12 flex flex-col md:flex-row items-center justify-between gap-2 text-sm text-outline">
-          <p>© 2026 Maheen Ilyas. All rights reserved.</p>
+        <footer className="py-8 pb-28 px-6 md:px-12 flex flex-col md:flex-row items-center justify-center gap-2 text-sm text-outline text-center">
+          <p>© 2026. All rights reserved.</p>
         </footer>
       </main>
     </>

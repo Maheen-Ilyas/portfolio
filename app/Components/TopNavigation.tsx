@@ -148,7 +148,7 @@ export default function TopNavigation() {
                   </div>
                 </div>
                 <p className="text-xs text-white/50 mt-10 md:mt-0">
-                  © 2026 Maheen Ilyas. All rights reserved.
+                  © 2026. All rights reserved.
                 </p>
               </div>
             </div>

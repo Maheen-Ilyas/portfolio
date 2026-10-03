@@ -6,7 +6,6 @@ const skills = [
   "JavaScript",
   "TypeScript",
   "Dart",
-  "HTML/CSS",
   "Flutter",
   "React",
   "Next.js",
@@ -15,11 +14,15 @@ const skills = [
   "Supabase",
   "ChromaDB",
   "PostgreSQL",
-  "Git/GitHub",
-  "Pandas/NumPy",
+  "Git",
+  "GitHub",
+  "Pandas",
+  "NumPy",
+  "Matplotlib",
   "Scikit-Learn",
   "TensorFlow",
   "PyTorch",
+  "Hugging Face",
   "LangChain",
 ];
 const facts = [
@@ -114,16 +117,6 @@ export default function About() {
             </dl>
           </div>
         </div>
-
-        <p className="font-serif italic text-on-surface-variant mt-10 text-lg">
-          <span
-            className="text-secondary not-italic font-bold text-2xl align-middle mr-2"
-            data-cursor="Steal"
-          >
-            *
-          </span>
-          Interviewed by no one. Confessed to everything.
-        </p>
       </div>
     </section>
   );
