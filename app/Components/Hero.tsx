@@ -11,7 +11,6 @@ export default function Hero({
       id="hero"
       className="min-h-screen pt-32 pb-20 px-6 md:px-12 flex flex-col justify-center relative overflow-hidden"
     >
-      {/* Flat lilac disc, no gradient */}
       <motion.div
         aria-hidden
         animate={{ y: [0, -24, 0] }}
@@ -55,12 +54,6 @@ export default function Hero({
             >
               Intelligence
             </motion.span>
-            <span
-              className="text-secondary text-4xl md:text-7xl cursor-pointer"
-              data-cursor="Steal"
-            >
-              *
-            </span>
           </span>
         </motion.h1>
 
