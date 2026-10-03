@@ -1,20 +1,24 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
+import { Bricolage_Grotesque, EB_Garamond, Outfit } from "next/font/google";
 import CustomCursor from "./Components/CustomCursor";
 import SmoothScroll from "./Components/SmoothScroll";
 import "./globals.css";
 
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
+const bricolage = Bricolage_Grotesque({
+  variable: "--font-bricolage",
   subsets: ["latin"],
-  weight: ["400", "700", "900"],
+  weight: ["400", "500", "600", "700", "800"],
+});
+const garamond = EB_Garamond({
+  variable: "--font-garamond",
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
   style: ["normal", "italic"],
 });
-
-const inter = Inter({
-  variable: "--font-inter",
+const outfit = Outfit({
+  variable: "--font-outfit-src",
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
+  weight: ["300", "400", "500", "600"],
 });
 
 export const metadata: Metadata = {
@@ -25,16 +29,14 @@ export const metadata: Metadata = {
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${playfair.variable} ${inter.variable} antialiased`}>
+      <body
+        className={`${bricolage.variable} ${garamond.variable} ${outfit.variable} antialiased`}
+      >
         <SmoothScroll>
           <CustomCursor />
-          {/* Newsprint grain overlay */}
-          <div className="pointer-events-none fixed inset-0 z-9999 opacity-[0.04] mix-blend-multiply noise-bg" />
           {children}
         </SmoothScroll>
       </body>

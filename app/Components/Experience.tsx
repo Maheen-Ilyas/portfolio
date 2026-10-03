@@ -1,245 +1,139 @@
 "use client";
 import { useState } from "react";
-import { motion, AnimatePresence, Variants } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
-interface ExperienceEntry {
-    year: string;
-    role: string;
-    company: string;
-    location?: string;
-    bullets?: string[];
-}
-
-const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-        opacity: 1,
-        transition: { staggerChildren: 0.12 },
-    },
-};
-
-const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 30, filter: "blur(8px)" },
-    visible: {
-        opacity: 1, y: 0, filter: "blur(0px)",
-        transition: { duration: 0.7, ease: "easeOut" },
-    },
-};
-
-function ExperienceItem({ item, index }: { item: ExperienceEntry; index: number }) {
-    const [expanded, setExpanded] = useState(false);
-    const hasBullets = item.bullets && item.bullets.length > 0;
-
-    return (
-        <motion.article
-            variants={itemVariants}
-            className="border-b"
-            style={{ borderColor: "var(--rule)" }}
-        >
-            <button
-                onClick={() => hasBullets && setExpanded(!expanded)}
-                className={`w-full text-left px-0 py-6 group ${hasBullets ? "" : ""}`}
-                style={{ cursor: hasBullets ? undefined : "default" }}
-            >
-                <div className="grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-6 items-start">
-                    {/* Index & date */}
-                    <div className="md:col-span-2">
-                        <span
-                            className="font-serif text-3xl font-black leading-none"
-                            style={{ color: "var(--red)" }}
-                        >
-                            {String(index + 1).padStart(2, "0")}
-                        </span>
-                        <p className="dateline mt-1">{item.year}</p>
-                    </div>
-
-                    {/* Role & company */}
-                    <div className="md:col-span-8 flex flex-col">
-                        <h3
-                            className="font-serif text-2xl md:text-3xl font-bold tracking-tight group-hover:translate-x-1 transition-transform duration-300"
-                            style={{ color: "var(--ink)" }}
-                        >
-                            {item.role}
-                        </h3>
-                        <p className="font-sans text-base italic mt-1" style={{ color: "var(--ink-faded)" }}>
-                            {item.company}
-                        </p>
-                        {item.location && (
-                            <span
-                                className="tag-pill mt-2 self-start"
-                                style={{ borderColor: "var(--rule)", color: "var(--ink-faded)" }}
-                            >
-                                {item.location}
-                            </span>
-                        )}
-                    </div>
-
-                    {/* Expand indicator */}
-                    {hasBullets && (
-                        <div className="md:col-span-2 flex items-center justify-end">
-                            <motion.span
-                                animate={{ rotate: expanded ? 45 : 0 }}
-                                transition={{ duration: 0.25 }}
-                                className="font-sans text-2xl leading-none select-none"
-                                style={{ color: "var(--red)" }}
-                            >
-                                +
-                            </motion.span>
-                        </div>
-                    )}
-                </div>
-            </button>
-
-            {/* Expandable bullets */}
-            <AnimatePresence>
-                {expanded && hasBullets && (
-                    <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.4, ease: "easeInOut" }}
-                        className="overflow-hidden"
-                    >
-                        <div
-                            className="pb-6 pl-0 md:pl-[calc(16.666%+1.5rem)] border-l-4 ml-0 md:ml-[16.666%]"
-                            style={{ borderColor: "var(--red)" }}
-                        >
-                            <ul className="space-y-3 pl-4 md:pl-6">
-                                {item.bullets!.map((b, i) => (
-                                    <motion.li
-                                        key={i}
-                                        initial={{ opacity: 0, x: -8 }}
-                                        animate={{ opacity: 1, x: 0 }}
-                                        transition={{ delay: i * 0.08 }}
-                                        className="font-sans text-sm leading-relaxed flex gap-3"
-                                        style={{ color: "var(--ink-faded)" }}
-                                    >
-                                        <span style={{ color: "var(--red)", flexShrink: 0 }}>✦</span>
-                                        <span>{b}</span>
-                                    </motion.li>
-                                ))}
-                            </ul>
-                        </div>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-        </motion.article>
-    );
-}
+const experiences = [
+  {
+    id: "eswift",
+    role: "Software Engineer",
+    company: "eSwiftSoftware",
+    year: "Apr 2026 – Jul 2026",
+    details:
+      "Led the end-to-end development of a zero-dependency desktop application automating security policy injection into pre-compiled mobile apps without source code access. Spearheaded the architectural design for an upcoming enterprise data warehouse, focusing on centralising cross-platform analytics and designing scalable ETL pipelines.",
+    tags: ["FastAPI", "Python", "ETL", "Security"],
+  },
+  {
+    id: "repsoft",
+    role: "Software Engineering Intern",
+    company: "Repsoft Consultancy Services",
+    year: "Jun 2024 – Sep 2024",
+    details:
+      "Engineered and optimised Flutter applications to enhance UI responsiveness and considerably improve user satisfaction. Partnered with design teams to implement intuitive UI/UX components for 3 applications with over 20 screens each.",
+    tags: ["Flutter", "Dart", "UI/UX", "Mobile"],
+  },
+  {
+    id: "gdg",
+    role: "Chief Coordinator",
+    company: "GDG on Campus",
+    year: "Sep 2024 – Jul 2025",
+    details:
+      "Led the Google Developer Groups on Campus chapter, organizing workshops, hackathons, and technical sessions for hundreds of students. Managed a core team of developers to build community-driven projects.",
+    tags: ["Leadership", "Community", "Event Management"],
+  },
+];
 
 export default function Experience() {
-    const experiences: ExperienceEntry[] = [
-        {
-            year: "Apr 2026 – Jul 2026",
-            role: "Software Engineer",
-            company: "eSwiftSoftware",
-            location: "Remote",
-            bullets: [
-                "Led the end-to-end development of a desktop application that automates the injection of security policies into pre-compiled mobile apps (APKs/IPAs) without modifying the source code.",
-                "Spearheaded the architectural design for an upcoming enterprise data warehouse, focusing on centralising cross-platform analytics and designing scalable ETL pipelines.",
-            ],
-        },
-        {
-            year: "Jun 2024 – Sep 2024",
-            role: "Software Engineering Intern",
-            company: "Repsoft Consultancy Services Ltd.",
-            location: "Remote",
-            bullets: [
-                "Engineered and optimised Flutter applications to enhance UI responsiveness and considerably improve user satisfaction.",
-                "Partnered with design teams to implement intuitive UI/UX components for 3 applications with over 20 screens each.",
-            ],
-        },
-    ];
+  const [openId, setOpenId] = useState<string | null>("eswift");
 
-    const leadership: ExperienceEntry[] = [
-        {
-            year: "Sep 2024 – Jul 2025",
-            role: "Chief Coordinator",
-            company: "Google Developer Groups on Campus",
-            location: "On-site",
-        },
-        {
-            year: "Jul 2023 – May 2024",
-            role: "General Secretary",
-            company: "Google Developer Student Clubs",
-            location: "On-site",
-        },
-    ];
+  return (
+    <section id="experience" className="py-28 px-6 md:px-12 bg-white">
+      <div className="max-w-5xl mx-auto">
+        <header className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-14">
+          <h2 className="group font-sans text-4xl md:text-6xl font-extrabold tracking-tighter uppercase leading-none text-primary">
+            <span data-redact>The</span>
+            <span className="font-serif italic font-normal normal-case ml-3 text-secondary">
+              Chapters
+            </span>
+          </h2>
+          <p className="text-sm rounded-full px-4 py-1.5 self-start md:self-auto bg-secondary-fixed/60 text-brand-mid">
+            Software · AI · Community
+          </p>
+        </header>
 
-    return (
-        <section
-            id="experience"
-            className="border-t"
-            style={{ borderColor: "var(--rule)", background: "var(--cream)" }}
-        >
-            {/* Section header bar */}
-            <div
-                className="px-6 md:px-12 py-4 flex items-center justify-between border-b"
-                style={{ borderColor: "var(--rule)" }}
-            >
-                <p className="section-label">02 / Experience</p>
-                <div className="flex-1 mx-6 border-t" style={{ borderColor: "var(--rule)" }} />
-                <p className="dateline">The Chapters</p>
-            </div>
+        <div className="flex flex-col gap-4">
+          {experiences.map((exp) => {
+            const open = openId === exp.id;
+            return (
+              <div
+                key={exp.id}
+                className={`rounded-[1.75rem] border transition-colors ${open ? "bg-secondary-fixed/40 border-secondary-fixed-dim" : "bg-surface-low border-outline-variant/50 hover:border-secondary-container"}`}
+              >
+                <h3>
+                  <button
+                    className="w-full text-left p-6 md:p-8 flex items-center justify-between gap-4 group"
+                    onClick={() => setOpenId(open ? null : exp.id)}
+                    aria-expanded={open}
+                    data-cursor={open ? "Close" : "Open"}
+                  >
+                    <span className="flex flex-col gap-1">
+                      <span className="font-sans text-2xl md:text-3xl font-extrabold tracking-tighter text-primary group-hover:text-secondary transition-colors">
+                        {exp.role}
+                      </span>
+                      <span className="font-serif italic text-lg text-on-surface-variant">
+                        {exp.company}
+                      </span>
+                    </span>
+                    <span className="flex items-center gap-4 shrink-0">
+                      <span className="hidden md:block text-sm text-brand-mid bg-secondary-fixed rounded-full px-3 py-1">
+                        {exp.year}
+                      </span>
+                      <span
+                        className={`relative w-10 h-10 rounded-full flex items-center justify-center transition-colors ${open ? "bg-secondary" : "bg-primary"}`}
+                      >
+                        <span className="absolute w-4 h-px bg-white" />
+                        <span
+                          className={`absolute h-4 w-px bg-white transition-transform duration-300 ${open ? "rotate-90 opacity-0" : ""}`}
+                        />
+                      </span>
+                    </span>
+                  </button>
+                </h3>
 
-            {/* Work experience */}
-            <div className="grid grid-cols-1 md:grid-cols-12 border-b" style={{ borderColor: "var(--rule)" }}>
-                <div className="md:col-span-3 px-6 md:px-12 py-12 border-r" style={{ borderColor: "var(--rule)" }}>
-                    <h1
-                        className="font-serif text-4xl md:text-5xl font-black tracking-tight leading-tight"
-                        style={{ color: "var(--ink)" }}
-                    >
-                        The<br />Chapters.
-                    </h1>
-                    <div className="column-rule-red mt-6" style={{ borderTopWidth: "2px", borderTopStyle: "solid", borderColor: "var(--red)" }} />
-                    <p className="font-sans text-sm mt-4 leading-relaxed" style={{ color: "var(--ink-faded)" }}>
-                        Tap any role to read the full story.
-                    </p>
-                </div>
-
-                <div className="md:col-span-9 px-6 md:px-12 py-6">
-                    <p className="dateline mb-4 pt-6">Work Experience</p>
-                    <div className="column-rule mb-0" style={{ borderTopWidth: "3px", borderTopStyle: "double", borderColor: "var(--ink)" }} />
+                <AnimatePresence initial={false}>
+                  {open && (
                     <motion.div
-                        variants={containerVariants}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: "auto", opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.4, ease: [0.23, 1, 0.32, 1] }}
+                      className="overflow-hidden"
                     >
-                        {experiences.map((item, i) => (
-                            <ExperienceItem key={i} item={item} index={i} />
-                        ))}
+                      <div className="px-6 md:px-8 pb-8">
+                        <p className="md:hidden text-sm text-brand-mid mb-3">
+                          {exp.year}
+                        </p>
+                        <p className="text-on-surface-variant leading-relaxed max-w-3xl mb-6">
+                          {exp.details}
+                        </p>
+                        <ul className="flex flex-wrap gap-2">
+                          {exp.tags.map((t) => (
+                            <li
+                              key={t}
+                              className="text-sm rounded-full bg-white border border-secondary-fixed-dim text-primary px-3 py-1"
+                            >
+                              {t}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </motion.div>
-                </div>
-            </div>
+                  )}
+                </AnimatePresence>
+              </div>
+            );
+          })}
+        </div>
 
-            {/* Leadership */}
-            <div className="grid grid-cols-1 md:grid-cols-12 border-b" style={{ borderColor: "var(--rule)" }}>
-                <div className="md:col-span-3 px-6 md:px-12 py-12 border-r" style={{ borderColor: "var(--rule)" }}>
-                    <h1
-                        className="font-serif text-4xl md:text-5xl font-black tracking-tight leading-tight"
-                        style={{ color: "var(--ink)" }}
-                    >
-                        Leadership.
-                    </h1>
-                    <div className="column-rule-red mt-6" style={{ borderTopWidth: "2px", borderTopStyle: "solid", borderColor: "var(--red)" }} />
-                </div>
-
-                <div className="md:col-span-9 px-6 md:px-12 py-6">
-                    <p className="dateline mb-4 pt-6">Community & Leadership Roles</p>
-                    <div className="column-rule mb-0" style={{ borderTopWidth: "3px", borderTopStyle: "double", borderColor: "var(--ink)" }} />
-                    <motion.div
-                        variants={containerVariants}
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                    >
-                        {leadership.map((item, i) => (
-                            <ExperienceItem key={i} item={item} index={i} />
-                        ))}
-                    </motion.div>
-                </div>
-            </div>
-        </section>
-    );
+        <p className="font-serif italic text-on-surface-variant mt-10 text-lg">
+          <span
+            className="text-secondary not-italic font-bold text-2xl align-middle mr-2"
+            data-cursor="Steal"
+          >
+            *
+          </span>
+          Three methods. One motive.
+        </p>
+      </div>
+    </section>
+  );
 }

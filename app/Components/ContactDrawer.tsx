@@ -3,221 +3,223 @@ import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface ContactDrawerProps {
-    isOpen: boolean;
-    onClose: () => void;
+  isOpen: boolean;
+  onClose: () => void;
 }
 
+const field =
+  "w-full rounded-2xl bg-surface-low border border-outline-variant px-4 py-3.5 text-primary placeholder:text-outline/60 outline-none transition focus:border-secondary focus:ring-4 focus:ring-secondary-fixed";
+
 export default function ContactDrawer({ isOpen, onClose }: ContactDrawerProps) {
-    const [formState, setFormState] = useState({ name: "", email: "", message: "" });
-    const [isSubmitting, setIsSubmitting] = useState(false);
-    const [isSuccess, setIsSuccess] = useState(false);
+  const [formState, setFormState] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
-    useEffect(() => {
-        if (isOpen) {
-            document.body.style.overflow = "hidden";
-            document.documentElement.classList.add("lenis-stopped");
-        } else {
-            document.body.style.overflow = "unset";
-            document.documentElement.classList.remove("lenis-stopped");
-        }
-        return () => {
-            document.body.style.overflow = "unset";
-            document.documentElement.classList.remove("lenis-stopped");
-        };
-    }, [isOpen]);
-
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setIsSubmitting(true);
-        await new Promise(resolve => setTimeout(resolve, 1500));
-        setIsSubmitting(false);
-        setIsSuccess(true);
-        setTimeout(() => {
-            setIsSuccess(false);
-            setFormState({ name: "", email: "", message: "" });
-            onClose();
-        }, 3000);
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "unset";
+    document.documentElement.classList.toggle("lenis-stopped", isOpen);
+    return () => {
+      document.body.style.overflow = "unset";
+      document.documentElement.classList.remove("lenis-stopped");
     };
+  }, [isOpen]);
 
-    const inputStyle = {
-        width: "100%",
-        background: "var(--paper)",
-        border: "1px solid var(--rule)",
-        padding: "0.875rem 1rem",
-        outline: "none",
-        fontFamily: "var(--font-sans)",
-        fontSize: "0.9rem",
-        color: "var(--ink)",
-        borderRadius: "2px",
-        transition: "border-color 0.2s",
-    };
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    await new Promise((r) => setTimeout(r, 1500)); // TODO: replace with a real API call
+    setIsSubmitting(false);
+    setIsSuccess(true);
+    setTimeout(() => {
+      setIsSuccess(false);
+      setFormState({ name: "", email: "", message: "" });
+      onClose();
+    }, 3000);
+  };
 
-    return (
-        <AnimatePresence>
-            {isOpen && (
-                <>
-                    {/* Backdrop */}
-                    <motion.div
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        exit={{ opacity: 0 }}
-                        onClick={onClose}
-                        className="fixed inset-0 z-100 cursor-pointer"
-                        style={{ background: "rgba(26,26,26,0.5)", backdropFilter: "blur(4px)" }}
-                    />
+  return (
+    <AnimatePresence>
+      {isOpen && (
+        <>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="fixed inset-0 z-100 bg-primary/50 backdrop-blur-sm cursor-pointer"
+          />
 
-                    {/* Drawer with Lenis prevention */}
-                    <motion.div
-                        initial={{ x: "100%" }}
-                        animate={{ x: 0 }}
-                        exit={{ x: "100%" }}
-                        transition={{ type: "spring", damping: 30, stiffness: 200 }}
-                        data-lenis-prevent
-                        data-lenis-prevent-wheel
-                        data-lenis-prevent-touch
-                        className="fixed right-0 top-0 bottom-0 w-screen md:w-125 z-101 flex flex-col border-l overscroll-contain"
-                        style={{ background: "var(--cream)", borderColor: "var(--rule)" }}
+          <motion.aside
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "spring", damping: 30, stiffness: 200 }}
+            data-lenis-prevent
+            className="fixed right-0 top-0 bottom-0 w-screen md:w-120 z-101 flex flex-col bg-white md:rounded-l-4xl overflow-hidden overscroll-contain"
+          >
+            <div className="h-1.5 shrink-0 bg-linear-to-r from-secondary via-secondary-container to-brand-mid" />
+
+            <div
+              data-lenis-prevent
+              className="flex-1 overflow-y-auto p-6 md:p-10 overscroll-contain"
+            >
+              <div className="flex justify-between items-start mb-8">
+                <div>
+                  <p className="text-sm text-secondary font-medium mb-2">
+                    Get in touch
+                  </p>
+                  <h2 className="font-sans text-4xl font-extrabold tracking-tighter text-primary leading-none">
+                    Send a{" "}
+                    <span className="font-serif italic font-normal text-secondary">
+                      message.
+                    </span>
+                  </h2>
+                </div>
+                <button
+                  onClick={onClose}
+                  aria-label="Close"
+                  className="w-10 h-10 rounded-full flex items-center justify-center text-outline hover:bg-secondary-fixed hover:text-secondary transition-colors"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                  >
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                  </svg>
+                </button>
+              </div>
+
+              {isSuccess ? (
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="flex flex-col items-center justify-center text-center gap-4 py-16"
+                >
+                  <div className="w-16 h-16 rounded-full bg-secondary-fixed text-secondary flex items-center justify-center">
+                    <svg
+                      className="w-8 h-8"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
                     >
-                        {/* Red top bar */}
-                        <div style={{ height: "4px", background: "var(--red)", flexShrink: 0 }} />
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                  </div>
+                  <h3 className="font-sans text-2xl font-bold text-primary">
+                    Message sent
+                  </h3>
+                  <p className="text-on-surface-variant">
+                    I&apos;ll get back to you as soon as possible.
+                  </p>
+                </motion.div>
+              ) : (
+                <form onSubmit={handleSubmit} className="space-y-5">
+                  {[
+                    {
+                      id: "name",
+                      label: "Name",
+                      type: "text",
+                      placeholder: "Jane Smith",
+                    },
+                    {
+                      id: "email",
+                      label: "Email",
+                      type: "email",
+                      placeholder: "jane@example.com",
+                    },
+                  ].map(({ id, label, type, placeholder }) => (
+                    <div key={id} className="space-y-2">
+                      <label
+                        htmlFor={id}
+                        className="block text-sm font-medium text-primary"
+                      >
+                        {label}
+                      </label>
+                      <input
+                        id={id}
+                        type={type}
+                        required
+                        placeholder={placeholder}
+                        className={field}
+                        value={formState[id as "name" | "email"]}
+                        onChange={(e) =>
+                          setFormState({ ...formState, [id]: e.target.value })
+                        }
+                      />
+                    </div>
+                  ))}
+                  <div className="space-y-2">
+                    <label
+                      htmlFor="message"
+                      className="block text-sm font-medium text-primary"
+                    >
+                      Message
+                    </label>
+                    <textarea
+                      id="message"
+                      required
+                      rows={5}
+                      className={`${field} resize-none`}
+                      placeholder="Tell me about your project or idea…"
+                      value={formState.message}
+                      onChange={(e) =>
+                        setFormState({ ...formState, message: e.target.value })
+                      }
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    disabled={isSubmitting}
+                    className="w-full rounded-full bg-primary text-white py-4 text-sm font-semibold hover:bg-secondary transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isSubmitting ? "Sending…" : "Send message"}
+                  </button>
+                </form>
+              )}
+            </div>
 
-                        <div
-                            data-lenis-prevent
-                            data-lenis-prevent-wheel
-                            data-lenis-prevent-touch
-                            className="flex-1 overflow-y-auto p-6 md:p-12 overscroll-contain"
-                        >
-                            {/* Header */}
-                            <div className="flex justify-between items-start mb-8">
-                                <div>
-                                    <p className="section-label mb-2">Get in Touch</p>
-                                    <div className="column-rule mb-3" style={{ borderTopWidth: "3px", borderTopStyle: "double", borderColor: "var(--ink)", width: "100%" }} />
-                                    <h2
-                                        className="font-serif text-3xl md:text-4xl font-black tracking-tight"
-                                        style={{ color: "var(--ink)" }}
-                                    >
-                                        Send a<br />Message.
-                                    </h2>
-                                </div>
-                                <button
-                                    onClick={onClose}
-                                    className="p-2 transition-colors mt-1"
-                                    style={{ color: "var(--ink-faded)" }}
-                                    onMouseEnter={e => (e.currentTarget.style.color = "var(--red)")}
-                                    onMouseLeave={e => (e.currentTarget.style.color = "var(--ink-faded)")}
-                                >
-                                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                        <line x1="18" y1="6" x2="6" y2="18" />
-                                        <line x1="6" y1="6" x2="18" y2="18" />
-                                    </svg>
-                                </button>
-                            </div>
-
-                            {isSuccess ? (
-                                <motion.div
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    className="h-full flex flex-col items-center justify-center text-center space-y-4 py-16"
-                                >
-                                    <div
-                                        className="w-16 h-16 flex items-center justify-center border-2 rounded-full"
-                                        style={{ borderColor: "var(--red)", color: "var(--red)" }}
-                                    >
-                                        <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                                        </svg>
-                                    </div>
-                                    <h3 className="font-serif text-2xl font-bold tracking-tight" style={{ color: "var(--ink)" }}>
-                                        Message Sent!
-                                    </h3>
-                                    <p className="font-sans text-sm" style={{ color: "var(--ink-faded)" }}>
-                                        I&apos;ll get back to you as soon as possible.
-                                    </p>
-                                </motion.div>
-                            ) : (
-                                <form onSubmit={handleSubmit} className="space-y-6">
-                                    {[
-                                        { id: "name", label: "Name", type: "text", placeholder: "Jane Smith" },
-                                        { id: "email", label: "Email", type: "email", placeholder: "jane@example.com" },
-                                    ].map(({ id, label, type, placeholder }) => (
-                                        <div key={id} className="space-y-2">
-                                            <label
-                                                htmlFor={id}
-                                                className="dateline block"
-                                            >
-                                                {label}
-                                            </label>
-                                            <input
-                                                type={type}
-                                                id={id}
-                                                required
-                                                value={formState[id as "name" | "email"]}
-                                                onChange={e => setFormState({ ...formState, [id]: e.target.value })}
-                                                style={inputStyle}
-                                                placeholder={placeholder}
-                                                onFocus={e => (e.currentTarget.style.borderColor = "var(--ink)")}
-                                                onBlur={e => (e.currentTarget.style.borderColor = "var(--rule)")}
-                                            />
-                                        </div>
-                                    ))}
-
-                                    <div className="space-y-2">
-                                        <label htmlFor="message" className="dateline block">Message</label>
-                                        <textarea
-                                            id="message"
-                                            required
-                                            rows={5}
-                                            value={formState.message}
-                                            onChange={e => setFormState({ ...formState, message: e.target.value })}
-                                            style={{ ...inputStyle, resize: "none" }}
-                                            placeholder="Tell me about your project or idea…"
-                                            onFocus={e => (e.currentTarget.style.borderColor = "var(--ink)")}
-                                            onBlur={e => (e.currentTarget.style.borderColor = "var(--rule)")}
-                                        />
-                                    </div>
-
-                                    <button
-                                        type="submit"
-                                        disabled={isSubmitting}
-                                        className="w-full py-4 font-sans text-sm font-semibold uppercase tracking-widest flex items-center justify-center gap-2 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
-                                        style={{ background: "var(--ink)", color: "var(--cream)", borderRadius: "2px" }}
-                                        onMouseEnter={e => {
-                                            if (!isSubmitting) (e.currentTarget as HTMLElement).style.background = "var(--red)";
-                                        }}
-                                        onMouseLeave={e => {
-                                            (e.currentTarget as HTMLElement).style.background = "var(--ink)";
-                                        }}
-                                    >
-                                        {isSubmitting ? "Sending…" : "Send Message"}
-                                        {!isSubmitting && <span className="text-base">→</span>}
-                                    </button>
-                                </form>
-                            )}
-                        </div>
-
-                        {/* Footer */}
-                        <div
-                            className="px-6 md:px-12 py-4 border-t"
-                            style={{ borderColor: "var(--rule)" }}
-                        >
-                            <div className="flex gap-6">
-                                <a href="https://linkedin.com/in/maheen-ilyas" target="_blank" rel="noopener noreferrer"
-                                    className="dateline hover:opacity-60 transition-opacity" style={{ color: "var(--red)" }}>
-                                    LinkedIn
-                                </a>
-                                <a href="https://github.com/Maheen-Ilyas" target="_blank" rel="noopener noreferrer"
-                                    className="dateline hover:opacity-60 transition-opacity" style={{ color: "var(--red)" }}>
-                                    GitHub
-                                </a>
-                                <a href="mailto:mahilyaos05@gmail.com"
-                                    className="dateline hover:opacity-60 transition-opacity" style={{ color: "var(--red)" }}>
-                                    Email
-                                </a>
-                            </div>
-                        </div>
-                    </motion.div>
-                </>
-            )}
-        </AnimatePresence>
-    );
+            <div className="px-6 md:px-10 py-4 border-t border-outline-variant/50 flex gap-6 text-sm font-medium text-secondary">
+              <a
+                href="https://linkedin.com/in/maheen-ilyas"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary transition-colors"
+              >
+                LinkedIn
+              </a>
+              <a
+                href="https://github.com/Maheen-Ilyas"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-primary transition-colors"
+              >
+                GitHub
+              </a>
+              <a
+                href="mailto:mahilyaos05@gmail.com"
+                className="hover:text-primary transition-colors"
+              >
+                Email
+              </a>
+            </div>
+          </motion.aside>
+        </>
+      )}
+    </AnimatePresence>
+  );
 }

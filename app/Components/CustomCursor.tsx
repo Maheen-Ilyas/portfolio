@@ -3,79 +3,78 @@ import { useEffect, useState } from "react";
 import { motion, useMotionValue, useSpring } from "framer-motion";
 
 export default function CustomCursor() {
-    const [isPointer, setIsPointer] = useState(false);
-    const [isVisible, setIsVisible] = useState(false);
+  const [cursorText, setCursorText] = useState("");
+  const [isPointer, setIsPointer] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
-    // Raw coordinates for the inner dot
-    const mouseX = useMotionValue(0);
-    const mouseY = useMotionValue(0);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  const springConfig = { damping: 25, stiffness: 400, mass: 0.5 };
+  const smoothX = useSpring(mouseX, springConfig);
+  const smoothY = useSpring(mouseY, springConfig);
 
-    // Spring physics for the outer ring (creates the trailing effect)
-    const springConfig = { damping: 25, stiffness: 400, mass: 0.5 };
-    const smoothX = useSpring(mouseX, springConfig);
-    const smoothY = useSpring(mouseY, springConfig);
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      mouseX.set(e.clientX);
+      mouseY.set(e.clientY);
+      setIsVisible(true);
 
-    useEffect(() => {
-        const handleMouseMove = (e: MouseEvent) => {
-            mouseX.set(e.clientX);
-            mouseY.set(e.clientY);
-            setIsVisible(true);
+      const el = (e.target as HTMLElement).closest(
+        "a, button, .cursor-pointer, [data-cursor]",
+      );
+      setIsPointer(!!el);
+      setCursorText(el?.getAttribute("data-cursor") || "");
+    };
+    const hide = () => setIsVisible(false);
+    const show = () => setIsVisible(true);
 
-            const target = e.target as HTMLElement;
-            const isInteractive =
-                target.closest('a') ||
-                target.closest('button') ||
-                target.closest('.cursor-pointer') ||
-                ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName);
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    document.addEventListener("mouseleave", hide);
+    document.addEventListener("mouseenter", show);
+    return () => {
+      window.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseleave", hide);
+      document.removeEventListener("mouseenter", show);
+    };
+  }, [mouseX, mouseY]);
 
-            setIsPointer(!!isInteractive);
-        };
+  const base = "fixed top-0 left-0 pointer-events-none hidden md:block";
 
-        const handleMouseLeave = () => setIsVisible(false);
-        const handleMouseEnter = () => setIsVisible(true);
+  return (
+    <>
+      {/* Dot */}
+      <motion.div
+        style={{ x: smoothX, y: smoothY, opacity: isVisible ? 1 : 0 }}
+        className={`${base} z-10000`}
+      >
+        <div
+          className={`bg-secondary rounded-full -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ${isPointer ? "w-0 h-0" : "w-2.5 h-2.5"}`}
+        />
+      </motion.div>
 
-        window.addEventListener("mousemove", handleMouseMove, { passive: true });
-        document.addEventListener("mouseleave", handleMouseLeave);
-        document.addEventListener("mouseenter", handleMouseEnter);
+      {/* Ring */}
+      <motion.div
+        style={{ x: smoothX, y: smoothY, opacity: isVisible ? 1 : 0 }}
+        className={`${base} z-9999`}
+      >
+        <div
+          className={`-translate-x-1/2 -translate-y-1/2 rounded-full border transition-all duration-300 ${
+            isPointer
+              ? "w-14 h-14 border-secondary-container bg-secondary-container/20"
+              : "w-8 h-8 border-secondary/50"
+          }`}
+        />
+      </motion.div>
 
-        return () => {
-            window.removeEventListener("mousemove", handleMouseMove);
-            document.removeEventListener("mouseleave", handleMouseLeave);
-            document.removeEventListener("mouseenter", handleMouseEnter);
-        };
-    }, [mouseX, mouseY]);
-
-    return (
-        <>
-            {/* Outer Ring (Trails behind) */}
-            <motion.div
-                style={{
-                    x: smoothX,
-                    y: smoothY,
-                    opacity: isVisible ? 1 : 0,
-                }}
-                className="fixed top-0 left-0 pointer-events-none z-9999 mix-blend-difference"
-            >
-                <div
-                    className={`flex items-center justify-center -translate-x-1/2 -translate-y-1/2 rounded-full border border-white transition-all duration-300 ease-out ${isPointer ? "w-16 h-16 bg-white/10" : "w-10 h-10 bg-transparent"
-                        }`}
-                />
-            </motion.div>
-
-            {/* Inner Dot (Instant) */}
-            <motion.div
-                style={{
-                    x: mouseX,
-                    y: mouseY,
-                    opacity: isVisible ? 1 : 0,
-                }}
-                className="fixed top-0 left-0 pointer-events-none z-9999 mix-blend-difference"
-            >
-                <div
-                    className={`bg-white rounded-full -translate-x-1/2 -translate-y-1/2 transition-all duration-300 ${isPointer ? "w-0 h-0" : "w-2 h-2"
-                        }`}
-                />
-            </motion.div>
-        </>
-    );
+      {/* Label */}
+      <motion.div
+        style={{ x: smoothX, y: smoothY, opacity: cursorText ? 1 : 0 }}
+        className={`${base} z-10001`}
+      >
+        <div className="absolute left-8 top-8 bg-primary text-white px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap">
+          {cursorText}
+        </div>
+      </motion.div>
+    </>
+  );
 }
